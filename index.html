@@ -93,8 +93,10 @@ a.o.route-link:hover{background:var(--blue)}
 .mq span{display:inline-block;white-space:nowrap;font:400 calc(var(--fs)*var(--u)) "Martian Mono",monospace;letter-spacing:.01em;text-transform:uppercase;padding-left:calc(20*var(--u));animation:run 40s linear infinite}
 @keyframes run{to{transform:translateX(-50%)}}
 /* chips & inputs */
-.rsvp-slot{position:absolute;z-index:6;background:var(--paper)}
-.d .rsvp-slot{left:44.2%;width:51.6%;top:calc(9070 * var(--u));min-height:calc(771 * var(--u));padding:3px}
+.desktop-rsvp,.desktop-footer{position:relative}
+.desktop-rsvp{display:grid;min-height:calc(510 * var(--u));padding-top:calc(70 * var(--u));overflow:hidden}
+.desktop-rsvp>img{position:absolute;inset:0}
+.desktop-rsvp .rsvp-slot{position:relative;z-index:6;margin-left:44.2%;width:51.6%;padding:3px 3px calc(58 * var(--u) + 3px);background:var(--paper)}
 .rsvp{display:grid;gap:clamp(18px,4cqw,32px);padding:clamp(17px,4.5cqw,44px);background:var(--paper);border:1.5px solid var(--ink);border-radius:26px;font:400 16px/1.4 "Open Sans",sans-serif}
 .rsvp-field{display:grid;gap:8px}
 .rsvp label:not(.chip),.rsvp legend{font:500 18px/1.25 Onest,sans-serif}
@@ -136,11 +138,11 @@ a.o.route-link:hover{background:var(--blue)}
 button.o.bt[aria-busy=true]{opacity:.6;pointer-events:none}
 </style>
 <link rel="stylesheet" href="mobile.css?v=portrait-layout">
-<link rel="stylesheet" href="easter-eggs.css?v=portrait-wink">
+<link rel="stylesheet" href="easter-eggs.css?v=playlist">
 <link rel="stylesheet" href="collage.css?v=full-bleed">
-<link rel="stylesheet" href="garage-art.css?v=silhouettes">
-<script defer src="easter-eggs.js?v=portrait-wink"></script>
-<script defer src="garage-art.js?v=silhouettes"></script>
+<link rel="stylesheet" href="garage-art.css?v=disco-windows">
+<script defer src="easter-eggs.js?v=playlist"></script>
+<script defer src="garage-art.js?v=disco-windows"></script>
 <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
@@ -170,12 +172,41 @@ button.o.bt[aria-busy=true]{opacity:.6;pointer-events:none}
   <img src="img/d-06.webp" alt="" width="1440" height="1000" loading="lazy">
   <img src="img/d-07.webp" alt="" width="1440" height="1000" loading="lazy">
   <img src="img/d-08.webp" alt="" width="1440" height="1000" loading="lazy">
-  <img src="img/d-09.webp" alt="" width="1440" height="1000" loading="lazy">
-  <img src="img/d-10.webp" alt="" width="1440" height="578" loading="lazy">
+  <div class="desktop-rsvp">
+    <img src="img/d-09.webp" alt="" width="1440" height="1000" loading="lazy">
+    <div class="rsvp-slot">
+    <form class="rsvp" novalidate aria-label="Ответ на приглашение">
+      <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <div class="rsvp-field">
+        <label for="d-guest">Как тебя зовут?</label>
+        <input class="inp" id="d-guest" name="name" autocomplete="name" maxlength="80" required aria-describedby="d-name-error" placeholder="Имя">
+        <p id="d-name-error" class="rsvp-error" aria-live="polite"></p>
+      </div>
+      <fieldset>
+        <legend>Увидимся 7 декабря?</legend>
+        <div class="rsvp-choices">
+          <label class="chip"><input type="radio" name="attend" value="yes" checked>Да, приду!</label>
+          <label class="chip"><input type="radio" name="attend" value="maybe">Очень постараюсь</label>
+          <label class="chip"><input type="radio" name="attend" value="no">В этот раз не получится&nbsp;:(</label>
+        </div>
+      </fieldset>
+      <div class="rsvp-field">
+        <label for="d-song">Какую песню включить для тебя?</label>
+        <p id="d-song-note" class="rsvp-note">Необязательно · ту самую, которой невозможно не подпевать</p>
+        <input class="inp" id="d-song" name="song" maxlength="200" aria-describedby="d-song-note" placeholder="Исполнитель — песня">
+      </div>
+      <button class="mbtn" type="submit">отправить ответ</button>
+    </form>
+    </div>
+  </div>
+  <footer class="desktop-footer">
+    <img src="img/d-10.webp" alt="" width="1440" height="578" loading="lazy">
+    <div class="tx"></div>
+    <a class="o" href="https://t.me/maru_stepanova" style="--x:478;--y:216;--w:280;--h:105">написать в Telegram</a>
+  </footer>
   <div class="band" aria-hidden="true"></div>
   <div class="garage-art" id="garage-desktop">
     <div class="garage-art__picture"><img src="img/garage-print.webp" width="1774" height="887" loading="lazy" alt="Garage du funk · фасад с мятной дверью"></div>
-    <button type="button" aria-label="Свет окон и гирлянды" aria-pressed="false" hidden><span class="garage-art__status">Свет выключен</span></button>
   </div>
   <div class="toast-stage" aria-hidden="true">
     <div class="paper-confetti"></div>
@@ -201,31 +232,6 @@ button.o.bt[aria-busy=true]{opacity:.6;pointer-events:none}
   <a class="o maps route-link" href="https://yandex.ru/maps/?text=Пермь%2C%20Советская%20улица%2C%2051А%2F2" style="--x:943;--y:6603;--w:195;--h:62">как добраться</a>
   <a class="o" data-b="8:694" href="#rsvp" style="--x:641;--y:7837;--w:159;--h:58">увидимся?</a>
   <a class="o wish" data-b="38:1532" href="https://podarkus.ru/user/768787" target="_blank" rel="noopener" style="--x:895;--y:8721;--w:395;--h:89">открыть мой вишлист</a>
-  <a class="o" href="https://t.me/maru_stepanova" style="--x:478;--y:10216;--w:280;--h:105">написать в Telegram</a>
-  <div class="rsvp-slot">
-  <form class="rsvp" novalidate aria-label="Ответ на приглашение">
-    <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
-    <div class="rsvp-field">
-      <label for="d-guest">Как тебя зовут?</label>
-      <input class="inp" id="d-guest" name="name" autocomplete="name" maxlength="80" required aria-describedby="d-name-error" placeholder="Имя">
-      <p id="d-name-error" class="rsvp-error" aria-live="polite"></p>
-    </div>
-    <fieldset>
-      <legend>Увидимся 7 декабря?</legend>
-      <div class="rsvp-choices">
-        <label class="chip"><input type="radio" name="attend" value="yes" checked>Да, приду!</label>
-        <label class="chip"><input type="radio" name="attend" value="maybe">Очень постараюсь</label>
-        <label class="chip"><input type="radio" name="attend" value="no">В этот раз не получится&nbsp;:(</label>
-      </div>
-    </fieldset>
-    <div class="rsvp-field">
-      <label for="d-song">Какую песню включить для тебя?</label>
-      <p id="d-song-note" class="rsvp-note">Необязательно · ту самую, которой невозможно не подпевать</p>
-      <input class="inp" id="d-song" name="song" maxlength="200" aria-describedby="d-song-note" placeholder="Исполнитель — песня">
-    </div>
-    <button class="mbtn" type="submit">отправить ответ</button>
-  </form>
-  </div>
 </main>
 
 <div class="hd only-m"><div class="mobile-top">
@@ -287,7 +293,6 @@ button.o.bt[aria-busy=true]{opacity:.6;pointer-events:none}
     <p>Приходи, когда удобно. Вход по открыткам, сделанным своими руками!</p>
     <div class="garage-art" id="garage-mobile">
       <div class="garage-art__picture"><img src="img/garage-print.webp" width="1774" height="887" loading="lazy" alt="Garage du funk · фасад с мятной дверью"></div>
-      <button type="button" aria-label="Свет окон и гирлянды" aria-pressed="false" hidden><span class="garage-art__status">Свет выключен</span></button>
     </div>
   </section>
   <section class="program" id="m-program">
@@ -404,10 +409,19 @@ button.o.bt[aria-busy=true]{opacity:.6;pointer-events:none}
 </main>
 
 <a class="up" href="#top" aria-label="Наверх">наверх<br>↑</a>
-<audio id="garage-track" src="audio/alai-oli-ne-otpuskajj-teplo.mp3" preload="none" loop></audio>
-<button class="music-toggle" type="button" aria-pressed="false" hidden>
+<button class="music-toggle" type="button" aria-controls="music-player" aria-expanded="false" hidden>
   <span class="music-icon" aria-hidden="true">♪</span><span class="music-label">Включить музыку</span>
 </button>
+<section class="music-player" id="music-player" aria-labelledby="music-player-title" hidden>
+  <div class="music-player-bar">
+    <h2 id="music-player-title">Однажды 7 декабря</h2>
+    <button class="music-player-hide" type="button">Скрыть</button>
+  </div>
+  <iframe data-src="https://music.yandex.ru/iframe/playlist/stepmashastep/1004"
+    title="Плейлист «Однажды 7 декабря» в Яндекс Музыке" width="614" height="556"
+    allow="clipboard-write; autoplay"></iframe>
+  <a href="https://music.yandex.ru/users/stepmashastep/playlists/1004" target="_blank" rel="noopener">Открыть в Яндекс Музыке ↗</a>
+</section>
 <div class="egg-toast" hidden>
   <span class="egg-message" role="status"></span>
   <a class="egg-song" href="#m-song" hidden>Предложить песню</a>
@@ -433,14 +447,20 @@ button.o.bt[aria-busy=true]{opacity:.6;pointer-events:none}
   // ---------- static text layer
   const DATA = JSON.parse(document.getElementById('hwdata').textContent);
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  for (const tx of document.querySelectorAll('.tx')) {
-    const S = DATA[tx.dataset.set], k = S.k, W = S.sz[0] / k, H = S.sz[1] / k;
+  const desktop = document.getElementById('desk');
+  const desktopFooter = desktop.querySelector('.desktop-footer');
+  const footerArtStart = 10000;
+  const S = DATA.d, k = S.k, W = S.sz[0] / k, H = S.sz[1] / k;
+  for (const [tx, artStart, artEnd] of [
+    [desktop.querySelector(':scope > .tx'), 0, footerArtStart],
+    [desktopFooter.querySelector('.tx'), footerArtStart, Infinity],
+  ]) {
     const frag = document.createDocumentFragment();
     for (const [x, y, w, h, , sx, sy] of S.b) {
       // The form now supplies its own labels and notes as HTML.
-      if (x >= 640 && y >= 9140 && y < 9700) continue;
+      if (y < artStart || y >= artEnd || (x >= 640 && y >= 9140 && y < 9700)) continue;
       const box = document.createElement('div'); box.className = 'hw';
-      box.style.cssText = `left:calc(${x}*var(--u));top:calc(${y}*var(--u));width:calc(${w}*var(--u));height:calc(${h}*var(--u));background-image:url(${S.src});background-size:calc(${W}*var(--u)) calc(${H}*var(--u));background-position:calc(${-sx / k}*var(--u)) calc(${-sy / k}*var(--u))`;
+      box.style.cssText = `left:calc(${x}*var(--u));top:calc(${y - artStart}*var(--u));width:calc(${w}*var(--u));height:calc(${h}*var(--u));background-image:url(${S.src});background-size:calc(${W}*var(--u)) calc(${H}*var(--u));background-position:calc(${-sx / k}*var(--u)) calc(${-sy / k}*var(--u))`;
       frag.appendChild(box);
     }
     tx.appendChild(frag);
@@ -451,13 +471,14 @@ button.o.bt[aria-busy=true]{opacity:.6;pointer-events:none}
   const DUR = { swing: [3.4, 4.6], twinkle: [2.2, 3.6], glimmer: [3, 4.6], float: [4.5, 7], bob: [3.5, 5], spin: [14, 22], spinslow: [70, 90], wobble: [2.6, 3.8], sway: [3.6, 4.8], nudge: [1.1, 1.5], drift: [4, 6], beat: [1.8, 2.2], none: [1, 1] };
   const items = [];
   let seed = 7; const rnd = () => (seed = (seed * 9301 + 49297) % 233280) / 233280;
-  const desktop = document.getElementById('desk');
   {
     const set = 'd', main = desktop;
     const secs = DC[set + 'sec'].map(([y, h], i) => {
       const sc = document.createElement('div'); sc.className = 'sc'; sc.dataset.i = i;
-      sc.style.cssText = `top:calc(${y}*var(--u));height:calc(${h}*var(--u))`;
-      main.appendChild(sc); return sc;
+      const inFooter = y >= footerArtStart;
+      const top = inFooter ? y - footerArtStart : y;
+      sc.style.cssText = `top:calc(${top}*var(--u));height:calc(${h}*var(--u))`;
+      (inFooter ? desktopFooter : main).appendChild(sc); return sc;
     });
     const free = document.createElement('div'); free.className = 'sc'; free.style.cssText = 'top:0;height:100%;overflow:visible'; main.appendChild(free);
     for (const it of DC[set]) {

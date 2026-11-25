@@ -44,6 +44,21 @@
           <stop offset=".47" stop-color="#ffedc8" stop-opacity=".14"/>
           <stop offset=".53" stop-color="#ffedc8" stop-opacity="0"/>
         </linearGradient>
+        <radialGradient id="${id}-disco-rose">
+          <stop stop-color="#ef78be" stop-opacity=".72"/>
+          <stop offset="1" stop-color="#ef78be" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="${id}-disco-violet">
+          <stop stop-color="#786eff" stop-opacity=".75"/>
+          <stop offset="1" stop-color="#786eff" stop-opacity="0"/>
+        </radialGradient>
+        <pattern id="${id}-disco-specks" width="149" height="113" patternUnits="userSpaceOnUse">
+          <ellipse cx="15" cy="24" rx="4" ry="2.2" fill="#fff1bc"/>
+          <ellipse cx="69" cy="14" rx="2.4" ry="1.6" fill="#edbbdf"/>
+          <ellipse cx="124" cy="47" rx="3.5" ry="2" fill="#a3adff"/>
+          <ellipse cx="43" cy="79" rx="2.7" ry="1.7" fill="#ffe0e4"/>
+          <ellipse cx="104" cy="96" rx="3.2" ry="1.8" fill="#fff6d9"/>
+        </pattern>
       </defs>
       ${standalone ? `<g ${label('facade','01 · Фасад и интерьер')}>
         <image href="${facade}" width="1774" height="887"/>
@@ -51,11 +66,15 @@
       <g ${label('window-dim','02 · Затемнение окон')} class="garage-art__off" ${standalone ? 'style="display:none"' : ''}>
         <rect width="1774" height="887" fill="#162637" opacity=".81" clip-path="url(#${id}-windows)"/>
       </g>
-      <g ${label('guests','03 · Гости за стеклом')} class="garage-art__on garage-art__guests" clip-path="url(#${id}-windows)" opacity=".89">
-        <image href="${silhouettes[0]}" x="317" y="511" width="202" height="229" filter="url(#${id}-ink)"/>
-        <image href="${silhouettes[1]}" x="518" y="421" width="205" height="333" filter="url(#${id}-ink)"/>
-        <image href="${silhouettes[2]}" x="1233" y="489" width="214" height="214" filter="url(#${id}-ink)"/>
-        <image href="${silhouettes[3]}" x="1453" y="475" width="175" height="175" filter="url(#${id}-ink)"/>
+      <g ${label('guests','03 · Гости за стеклом')} class="garage-art__on garage-art__guests" clip-path="url(#${id}-windows)">
+        <g opacity=".94" filter="url(#${id}-ink)">
+          <image href="${silhouettes[0]}" x="325" y="518" width="177" height="201"/>
+          <image href="${silhouettes[1]}" x="495" y="431" width="213" height="347"/>
+        </g>
+        <g opacity=".90" filter="url(#${id}-ink)">
+          <image href="${silhouettes[2]}" x="1239" y="590" width="168" height="168"/>
+          <image href="${silhouettes[3]}" x="1373" y="605" width="118" height="118"/>
+        </g>
       </g>
       <g ${label('glass','04 · Отражения')} class="garage-art__on" clip-path="url(#${id}-windows)">
         <rect x="160" y="347" width="580" height="410" fill="url(#${id}-reflection)"/>
@@ -63,6 +82,15 @@
       </g>
       <g ${label('bulbs-off','05 · Выключенные лампочки')} class="garage-art__off" ${standalone ? 'style="display:none"' : ''}>${bulbShades}</g>
       <g ${label('bulbs-on','06 · Свет гирлянды')} class="garage-art__on">${bulbGlows}</g>
+      <g ${label('disco','07 · Отблески дискотеки')} class="garage-art__on garage-art__disco" clip-path="url(#${id}-windows)">
+        <g class="garage-art__disco-wash">
+          <ellipse cx="480" cy="443" rx="196" ry="137" fill="url(#${id}-disco-rose)"/>
+          <ellipse cx="678" cy="625" rx="139" ry="115" fill="url(#${id}-disco-violet)"/>
+          <ellipse cx="1322" cy="509" rx="201" ry="133" fill="url(#${id}-disco-violet)"/>
+          <ellipse cx="1528" cy="683" rx="152" ry="117" fill="url(#${id}-disco-rose)"/>
+        </g>
+        <rect class="garage-art__disco-specks" x="80" y="290" width="1600" height="540" fill="url(#${id}-disco-specks)"/>
+      </g>
     </svg>`;
   }
 
@@ -79,9 +107,6 @@
   });
   const guestsReady = Promise.allSettled(silhouetteImages).then(images => images.every(image => image.status === 'fulfilled'));
   for (const scene of document.querySelectorAll('.garage-art')) {
-    const button = scene.querySelector('button');
-    let chosen = false;
-    let lit = false;
     const picture = scene.querySelector('.garage-art__picture');
     picture.insertAdjacentHTML('beforeend', garageSvg(scene.id, '', silhouettes));
     guestsReady.then(ready => { if (ready) scene.classList.add('has-silhouettes'); });
@@ -90,32 +115,21 @@
     arrival.textContent = 'Свои уже здесь';
     arrival.hidden = true;
     picture.append(arrival);
-    let arrivalTimer;
-    button.hidden = false;
-    function showLights(next) {
-      lit = next;
-      scene.dataset.lit = String(lit);
-      button.setAttribute('aria-pressed', String(lit));
-      button.querySelector('.garage-art__status').textContent = lit ? 'Свет включён' : 'Свет выключен';
-      clearTimeout(arrivalTimer);
-      arrival.hidden = !lit;
-      if (lit) arrivalTimer = setTimeout(() => { arrival.hidden = true; }, 4200);
+    function showLights() {
+      scene.dataset.lit = 'true';
+      arrival.hidden = false;
+      setTimeout(() => { arrival.hidden = true; }, 4200);
     }
-    showLights(false);
-    button.addEventListener('click', () => {
-      chosen = true;
-      showLights(!lit);
-    });
+    scene.dataset.lit = 'false';
     if (!('IntersectionObserver' in window)) {
-      showLights(true);
+      showLights();
       continue;
     }
     const observer = new IntersectionObserver(entries => {
-      if (entries.some(entry => entry.isIntersecting)) {
-        if (!chosen) showLights(true);
-        observer.disconnect();
-      }
-    }, {threshold:.3, rootMargin:'0px 0px -12% 0px'});
+      const visible = entries.at(-1).intersectionRatio >= .12;
+      scene.classList.toggle('garage-art--visible', visible);
+      if (visible && scene.dataset.lit === 'false') showLights();
+    }, {threshold:.12});
     observer.observe(scene);
   }
 })();

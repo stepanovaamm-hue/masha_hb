@@ -1,10 +1,9 @@
 .garage-art{
   position:relative;margin:21px 0 0;isolation:isolate;
-  --light-transition:450ms;
 }
 #desk .garage-art{
   position:absolute;z-index:3;left:calc(109 * var(--u));top:calc(2657 * var(--u));
-  width:calc(1220 * var(--u));margin:0;background:#e4e4e4;
+  width:calc(1220 * var(--u));margin:0;background:var(--paper);
 }
 .garage-art__picture{position:relative;aspect-ratio:2;line-height:0}
 .garage-art__picture :is(img,svg){display:block;width:100%;height:auto}
@@ -15,19 +14,47 @@
   background:#f1e9d6;color:#292729;padding:4px 9px;border-radius:999px;
   font:500 clamp(10px,1.4vw,16px)/1.25 Onest,sans-serif;white-space:nowrap;pointer-events:none
 }
-.garage-art__on,.garage-art__off{transition:opacity var(--light-transition) ease}
 .garage-art__on{opacity:0}
 .garage-art__off{opacity:1}
-.garage-art[data-lit="true"] .garage-art__on{opacity:1}
-.garage-art[data-lit="true"] .garage-art__off{opacity:0}
-.garage-art button{
-  display:flex;margin:auto;align-items:center;justify-content:center;min-height:44px;
-  gap:7px;padding:0 12px;border:1px solid #292729;border-radius:999px;color:#292729;
-  background:#f1e9d6;font:500 13px/1.2 Onest,sans-serif;cursor:pointer;
+.garage-art[data-lit="true"] .garage-art__on{opacity:1;animation:garage-light-on 1.6s ease-out}
+.garage-art[data-lit="true"] .garage-art__off{opacity:0;animation:garage-light-off 1.6s ease-out}
+.garage-art__disco{mix-blend-mode:screen}
+.garage-art__disco-wash{
+  opacity:.5;animation:garage-disco-sweep 5.6s ease-in-out infinite alternate paused
 }
-.garage-art button::before{
-  content:"";width:8px;height:8px;border-radius:50%;background:#98988c;
+.garage-art__disco-specks{
+  opacity:.45;animation:garage-disco-glints 3.4s ease-in-out infinite paused
 }
-.garage-art[data-lit="true"] button::before{background:#eab861;box-shadow:0 0 6px #dfa444a1}
-.garage-art button:focus-visible{outline:3px solid #5062c9;outline-offset:3px}
-@media (prefers-reduced-motion:reduce){.garage-art{--light-transition:0ms}}
+.garage-art--visible :is(.garage-art__disco-wash,.garage-art__disco-specks){
+  animation-play-state:running
+}
+@keyframes garage-disco-sweep{
+  0%{transform:translate(-38px,18px);opacity:.2}
+  45%{opacity:.75}
+  100%{transform:translate(55px,-12px);opacity:.45}
+}
+@keyframes garage-disco-glints{
+  0%,100%{transform:translate(-22px,12px);opacity:.24}
+  38%{opacity:.73}
+  68%{transform:translate(25px,-10px);opacity:.39}
+}
+@keyframes garage-light-on{
+  0%{opacity:0}
+  16%{opacity:.86}
+  29%{opacity:.35}
+  47%{opacity:.94}
+  61%{opacity:.58}
+  82%,100%{opacity:1}
+}
+@keyframes garage-light-off{
+  0%{opacity:1}
+  16%{opacity:.14}
+  29%{opacity:.65}
+  47%{opacity:.06}
+  61%{opacity:.42}
+  82%,100%{opacity:0}
+}
+@media (prefers-reduced-motion:reduce){
+  .garage-art[data-lit="true"] :is(.garage-art__on,.garage-art__off){animation:none}
+  .garage-art__disco-wash,.garage-art__disco-specks{animation:none}
+}

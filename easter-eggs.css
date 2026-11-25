@@ -2,7 +2,7 @@
   position:absolute;z-index:5;display:block;min-width:44px;min-height:44px;
   border:0;background:transparent;color:var(--ink);padding:0;cursor:pointer;border-radius:18px
 }
-.egg:focus-visible,.music-toggle:focus-visible,.egg-toast button:focus-visible{
+.egg:focus-visible,.music-toggle:focus-visible,.egg-toast button:focus-visible,.music-player :is(button,a):focus-visible{
   outline:3px solid #5062c9;outline-offset:3px
 }
 @media (hover:hover){.egg:hover{background:#fff2}}
@@ -56,8 +56,24 @@ button.egg[data-egg="candles"]:is(:hover,:active){background:transparent}
   background:var(--paper);color:var(--ink);border:1.5px solid var(--ink);border-radius:999px;
   padding:8px 13px;font:500 13px/1.2 Onest,sans-serif;box-shadow:2px 2px 0 var(--ink);cursor:pointer
 }
-.music-toggle[aria-pressed="true"]{background:var(--pink)}
+.music-toggle[aria-expanded="true"]{background:var(--pink)}
 .music-toggle .music-icon{font-size:17px}
+.music-player{
+  position:fixed;z-index:37;left:max(12px,env(safe-area-inset-left));
+  bottom:calc(max(12px,env(safe-area-inset-bottom)) + 54px);
+  width:min(636px,calc(100% - max(12px,env(safe-area-inset-left)) - max(12px,env(safe-area-inset-right))));
+  max-height:calc(100dvh - max(12px,env(safe-area-inset-bottom)) - max(12px,env(safe-area-inset-top)) - 54px);
+  display:grid;gap:8px;padding:10px;overflow:auto;background:var(--paper);color:var(--ink);
+  border:1.5px solid var(--ink);border-radius:18px;box-shadow:2px 3px 0 var(--ink)
+}
+.music-player-bar{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.music-player-bar h2{margin:0;font:500 18px/1.2 Onest,sans-serif}
+.music-player-hide{
+  min-height:44px;padding:0 12px;background:var(--pink);color:var(--ink);border:1px solid;border-radius:999px;
+  font:500 14px/1 Onest,sans-serif;cursor:pointer
+}
+.music-player iframe{display:block;width:100%;height:clamp(154px,calc(100dvh - 184px),556px);border:0;border-radius:12px}
+.music-player a{justify-self:start;color:inherit;font:500 13px/1.4 Onest,sans-serif;text-underline-offset:3px}
 .egg-toast{
   position:fixed;z-index:36;left:max(12px,env(safe-area-inset-left));bottom:calc(max(12px,env(safe-area-inset-bottom)) + 54px);
   max-width:min(320px,calc(100vw - 24px));background:var(--yellow);color:var(--ink);

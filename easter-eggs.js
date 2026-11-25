@@ -1,6 +1,8 @@
-const music = document.getElementById('garage-track');
 const musicToggle = document.querySelector('.music-toggle');
 const musicLabel = musicToggle.querySelector('.music-label');
+const musicPlayer = document.getElementById('music-player');
+const musicFrame = musicPlayer.querySelector('iframe');
+const musicHide = musicPlayer.querySelector('.music-player-hide');
 const toast = document.querySelector('.egg-toast');
 const toastText = toast.querySelector('.egg-message');
 const songLink = toast.querySelector('.egg-song');
@@ -20,26 +22,19 @@ function say(message, withSongLink = false) {
   if (!withSongLink) toastTimer = setTimeout(closeToast, 5000);
 }
 
-function updateMusic() {
-  const playing = !music.paused;
-  musicToggle.setAttribute('aria-pressed', String(playing));
-  musicLabel.textContent = playing ? 'Выключить музыку' : 'Включить музыку';
+function showMusicPlayer(open) {
+  musicPlayer.hidden = !open;
+  musicToggle.setAttribute('aria-expanded', String(open));
+  musicLabel.textContent = open ? 'Скрыть плеер' : 'Включить музыку';
+  if (open && !musicFrame.hasAttribute('src')) musicFrame.src = musicFrame.dataset.src;
+  (open ? musicHide : musicToggle).focus({preventScroll:true});
 }
 
 musicToggle.hidden = false;
-music.volume = 0.45;
-music.addEventListener('play', updateMusic);
-music.addEventListener('pause', updateMusic);
-musicToggle.addEventListener('click', async () => {
-  if (!music.paused) {
-    music.pause();
-    return;
-  }
-  try {
-    await music.play();
-  } catch {
-    say('Музыка не загрузилась. Попробуй ещё раз.');
-  }
+musicToggle.addEventListener('click', () => showMusicPlayer(musicPlayer.hidden));
+musicHide.addEventListener('click', () => showMusicPlayer(false));
+musicPlayer.addEventListener('keydown', event => {
+  if (event.key === 'Escape') showMusicPlayer(false);
 });
 
 toast.querySelector('button').addEventListener('click', closeToast);
