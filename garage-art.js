@@ -110,25 +110,15 @@
     const picture = scene.querySelector('.garage-art__picture');
     picture.insertAdjacentHTML('beforeend', garageSvg(scene.id, '', silhouettes));
     guestsReady.then(ready => { if (ready) scene.classList.add('has-silhouettes'); });
-    const arrival = document.createElement('span');
-    arrival.className = 'garage-art__arrival';
-    arrival.textContent = 'Свои уже здесь';
-    arrival.hidden = true;
-    picture.append(arrival);
-    function showLights() {
-      scene.dataset.lit = 'true';
-      arrival.hidden = false;
-      setTimeout(() => { arrival.hidden = true; }, 4200);
-    }
     scene.dataset.lit = 'false';
     if (!('IntersectionObserver' in window)) {
-      showLights();
+      scene.dataset.lit = 'true';
       continue;
     }
     const observer = new IntersectionObserver(entries => {
       const visible = entries.at(-1).intersectionRatio >= .12;
       scene.classList.toggle('garage-art--visible', visible);
-      if (visible && scene.dataset.lit === 'false') showLights();
+      if (visible && scene.dataset.lit === 'false') scene.dataset.lit = 'true';
     }, {threshold:.12});
     observer.observe(scene);
   }

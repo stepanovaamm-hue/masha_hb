@@ -9,11 +9,6 @@
 .garage-art__picture :is(img,svg){display:block;width:100%;height:auto}
 .garage-art__picture>svg{position:absolute;inset:0}
 .garage-art:not(.has-silhouettes) .garage-art__guests{visibility:hidden}
-.garage-art__arrival{
-  position:absolute;left:50%;top:11%;translate:-50% 0;
-  background:#f1e9d6;color:#292729;padding:4px 9px;border-radius:999px;
-  font:500 clamp(10px,1.4vw,16px)/1.25 Onest,sans-serif;white-space:nowrap;pointer-events:none
-}
 .garage-art__on{opacity:0}
 .garage-art__off{opacity:1}
 .garage-art[data-lit="true"] .garage-art__on{opacity:1;animation:garage-light-on 1.6s ease-out}
