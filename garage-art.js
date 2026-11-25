@@ -106,19 +106,30 @@
     return img.decode();
   });
   const guestsReady = Promise.allSettled(silhouetteImages).then(images => images.every(image => image.status === 'fulfilled'));
+  const lightDelay = 2400;
   for (const scene of document.querySelectorAll('.garage-art')) {
     const picture = scene.querySelector('.garage-art__picture');
     picture.insertAdjacentHTML('beforeend', garageSvg(scene.id, '', silhouettes));
     guestsReady.then(ready => { if (ready) scene.classList.add('has-silhouettes'); });
     scene.dataset.lit = 'false';
-    if (!('IntersectionObserver' in window)) {
+    let lightTimer;
+    const switchOn = () => {
       scene.dataset.lit = 'true';
+      lightTimer = undefined;
+    };
+    if (!('IntersectionObserver' in window)) {
+      setTimeout(switchOn, lightDelay);
       continue;
     }
     const observer = new IntersectionObserver(entries => {
       const visible = entries.at(-1).intersectionRatio >= .12;
       scene.classList.toggle('garage-art--visible', visible);
-      if (visible && scene.dataset.lit === 'false') scene.dataset.lit = 'true';
+      if (!visible) {
+        clearTimeout(lightTimer);
+        lightTimer = undefined;
+      } else if (scene.dataset.lit === 'false' && lightTimer === undefined) {
+        lightTimer = setTimeout(switchOn, lightDelay);
+      }
     }, {threshold:.12});
     observer.observe(scene);
   }
