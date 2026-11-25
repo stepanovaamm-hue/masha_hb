@@ -93,6 +93,11 @@ for (const button of document.querySelectorAll('.egg')) {
       case 'music-ball':
         discoGlints(button);
         break;
+      case 'wink':
+        if (button.classList.contains('is-winking')) break;
+        button.classList.add('is-winking');
+        setTimeout(() => button.classList.remove('is-winking'), 460);
+        break;
     }
   });
 }

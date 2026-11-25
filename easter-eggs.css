@@ -15,6 +15,21 @@
 .hero-art .egg[data-egg="music-ball"]{right:2%;top:-2%;width:23%;height:30%}
 .hero-art .egg[data-egg="microphone"]{left:4%;bottom:0;width:25%;height:41%}
 .hero-art .egg[data-egg="candles"]{right:8%;bottom:6%;width:26%;height:29%}
+.hero-art .egg[data-egg="wink"]{left:29%;bottom:47%;width:37%;height:41%}
+.egg[data-egg="wink"]:is(:hover,:active){background:transparent}
+.wink-lid{
+  position:absolute;z-index:4;pointer-events:none;opacity:0;
+  border-radius:60% 51% 58% 45%;transform:rotate(13deg);
+  background:radial-gradient(ellipse at 46% 50%,#cda187 30%,#d7aa9099 56%,#d8ae9400 73%);
+}
+.wink-lid::after{
+  content:"";position:absolute;left:20%;right:16%;top:33%;height:28%;
+  border-bottom:clamp(.8px,.13vw,2px) solid #64463a;border-radius:0 0 50% 55%;
+}
+#desk .wink-lid{top:calc(348 * var(--u));left:calc(1031 * var(--u));width:calc(39 * var(--u));height:calc(26 * var(--u))}
+.hero-art .wink-lid{bottom:calc(60.7% - 1px);left:51%;width:4.7%;aspect-ratio:1.5}
+.egg.is-winking+.wink-lid{animation:portrait-wink .46s ease both}
+@keyframes portrait-wink{0%,100%{opacity:0}17%,66%{opacity:1}}
 .hero-art .egg{z-index:5}
 button.egg[data-egg="candles"]:is(:hover,:active){background:transparent}
 .egg[data-egg="candles"]::after{
@@ -51,30 +66,8 @@ button.egg[data-egg="candles"]:is(:hover,:active){background:transparent}
 }
 .egg-toast button{position:absolute;top:0;right:0;min-width:34px;min-height:34px;border:0;background:transparent;cursor:pointer;font:500 20px Onest}
 .egg-toast a{display:block;color:inherit;text-underline-offset:3px}
-.garage-guests{position:absolute;inset:0;z-index:1;opacity:0;transition:opacity .65s 1.45s}
-.gar.on .garage-guests{opacity:.86}
-.garage-guest{position:absolute;bottom:-2%;left:var(--guest-x);width:var(--guest-w);height:var(--guest-h);color:#22232c;transform-origin:bottom center;filter:drop-shadow(0 -1px 1px #fff0bf40)}
-.garage-guest:nth-child(2){color:#292531}
-.garage-guest:nth-child(3){color:#1a202b}
-.gar.on .garage-guest{animation:guest-sway 5.2s ease-in-out var(--guest-delay) infinite alternate}
-@keyframes guest-sway{from{rotate:-1.8deg}to{rotate:2deg}}
-.gar .gp>img{filter:saturate(.72) brightness(1.08)}
-.gar .gp::after{
-  content:"";position:absolute;inset:0;z-index:2;pointer-events:none;opacity:0;
-  background:linear-gradient(118deg,transparent 28%,#fff6d81f 35%,transparent 52%),linear-gradient(0deg,#e0ad6418,transparent 35%);
-  transition:opacity .5s 1.5s
-}
-.gar.on .gp::after{opacity:1}
-.gar .gp .sp{opacity:0}
-.gar.on .gp .sp{opacity:.4}
-.garage-note{position:absolute;left:50%;top:calc(var(--y)*var(--u));translate:-50% -50%;
-  padding:4px 8px;border:1px solid var(--ink);background:var(--paper);color:var(--ink);border-radius:10px;
-  opacity:0;white-space:nowrap;font:500 clamp(9px,calc(24*var(--u)),18px)/1.2 Onest,sans-serif
-}
-.gar.on .garage-note{animation:garage-note 4s 1.25s both}
-@keyframes garage-note{0%,100%{opacity:0}12%,83%{opacity:1}}
 @media (prefers-reduced-motion:reduce){
-  .egg.effect,.gar.on .garage-guest,.gar.on .garage-note,.ball-glints i{animation:none}
-  .garage-guests,.stamp-mark,.gar .gp::after,.egg[data-egg="candles"]::after{transition:none}
-  .gar.on .garage-note{opacity:1}
+  .egg.effect,.ball-glints i{animation:none}
+  .stamp-mark,.egg[data-egg="candles"]::after{transition:none}
+  .egg.is-winking+.wink-lid{animation:none;opacity:1}
 }

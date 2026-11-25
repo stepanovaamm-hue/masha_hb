@@ -66,32 +66,6 @@ a.o:hover,button.o:hover{background:rgba(255,255,255,.14)}
 @keyframes drift{from{translate:calc(-5*var(--u)) 0}to{translate:calc(5*var(--u)) 0}}
 @keyframes beat{0%,60%,100%{scale:1}15%{scale:1.14}30%{scale:.98}45%{scale:1.08}}
 .band{position:absolute;left:calc(-100*var(--u));top:calc(805.5*var(--u));width:calc(1640*var(--u));height:calc(64*var(--u));background:var(--pink);rotate:-2.5deg;z-index:1;will-change:translate}
-/* garage: lights switch on */
-.gar{position:absolute;inset:0;pointer-events:none;z-index:1}
-.gw{position:absolute;left:calc(var(--x)*var(--u));top:calc(var(--y)*var(--u));width:calc(var(--w)*var(--u));height:calc(var(--h)*var(--u));opacity:1}
-.gw img{width:100%;height:100%}
-.gb,.gh{position:absolute;left:calc((var(--x) - var(--r))*var(--u));top:calc((var(--y) - var(--r))*var(--u));width:calc(2*var(--r)*var(--u));height:calc(2*var(--r)*var(--u));border-radius:50%}
-.gb{background:#6F6D66;box-shadow:inset 0 0 0 calc(var(--r)*.25*var(--u)) #3A3936;transition:opacity .12s var(--dl)}
-.gh{scale:2.6;background:radial-gradient(circle,rgba(255,236,170,.95) 0 22%,rgba(255,205,110,.45) 40%,rgba(255,190,90,0) 70%);opacity:0;transition:opacity .25s var(--dl);mix-blend-mode:screen}
-.gar.on .gb{opacity:0}
-.gar.on .gh{opacity:1;animation:glow 2.6s ease-in-out calc(var(--dl) + .3s) infinite alternate}
-@keyframes glow{from{opacity:1}to{opacity:.55}}
-.gar.on .gw{animation:flick .9s steps(1,end) var(--dl) forwards}
-@keyframes flick{0%{opacity:1}12%{opacity:.25}22%{opacity:.9}34%{opacity:.1}48%{opacity:.7}60%{opacity:0}100%{opacity:0}}
-.gar.off .gw{opacity:1;transition:opacity .6s}
-.gp{position:absolute;left:calc(var(--x)*var(--u));top:calc(var(--y)*var(--u));width:calc(var(--w)*var(--u));height:calc(var(--h)*var(--u));overflow:hidden}
-.gp img{width:100%;height:100%}
-.gp i{position:absolute;border-radius:50%;mix-blend-mode:screen;opacity:0;transition:opacity .8s}
-.gar.on .gp i{opacity:1;transition-delay:var(--dl)}
-.gp .amb{left:20%;top:45%;width:60%;height:80%;background:radial-gradient(closest-side,rgba(255,165,75,.6),rgba(255,140,60,0));animation:candle 1.9s ease-in-out infinite}
-.gp .pk{left:-10%;top:-20%;width:55%;height:90%;background:radial-gradient(closest-side,rgba(239,120,190,.45),rgba(239,120,190,0));animation:sweep 7s ease-in-out infinite alternate}
-.gp .vi{left:50%;top:-10%;width:60%;height:100%;background:radial-gradient(closest-side,rgba(120,110,255,.45),rgba(120,110,255,0));animation:sweep 9s ease-in-out infinite alternate-reverse}
-.gp .gr{left:-20%;top:-15%;width:140%;height:80%;background:radial-gradient(closest-side,rgba(110,230,130,.5),rgba(110,230,130,0));animation:candle 2.6s ease-in-out infinite}
-.gp .sp{inset:0;border-radius:0;width:100%;height:100%;background-image:radial-gradient(circle,rgba(255,255,255,.9) 0 calc(1.1*var(--u)),transparent calc(1.8*var(--u))),radial-gradient(circle,rgba(255,220,240,.8) 0 calc(.9*var(--u)),transparent calc(1.6*var(--u)));background-size:calc(36*var(--u)) calc(29*var(--u)),calc(51*var(--u)) calc(41*var(--u));background-position:0 0,calc(11*var(--u)) calc(7*var(--u));animation:specks 6s linear infinite,twk 1.3s steps(2,end) infinite}
-@keyframes candle{0%,100%{opacity:1;scale:1}20%{opacity:.75}35%{opacity:.95;scale:1.04}55%{opacity:.6;scale:.96}75%{opacity:.9}}
-@keyframes sweep{from{translate:0 0}to{translate:90% 10%}}
-@keyframes specks{to{background-position:calc(36*var(--u)) calc(-29*var(--u)),calc(-51*var(--u)) calc(41*var(--u))}}
-@keyframes twk{0%{opacity:.7}50%{opacity:.3}}
 /* falling paper confetti, above everything */
 .fall{position:fixed;inset:0;pointer-events:none;z-index:35;overflow:hidden;transition:opacity .6s}
 .fall.calm{opacity:0}
@@ -162,9 +136,11 @@ a.o.route-link:hover{background:var(--blue)}
 button.o.bt[aria-busy=true]{opacity:.6;pointer-events:none}
 </style>
 <link rel="stylesheet" href="mobile.css?v=garage-lights">
-<link rel="stylesheet" href="easter-eggs.css?v=candle-glow">
+<link rel="stylesheet" href="easter-eggs.css?v=portrait-wink">
 <link rel="stylesheet" href="collage.css">
-<script defer src="easter-eggs.js"></script>
+<link rel="stylesheet" href="garage-art.css">
+<script defer src="easter-eggs.js?v=portrait-wink"></script>
+<script defer src="garage-art.js"></script>
 <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
@@ -197,6 +173,10 @@ button.o.bt[aria-busy=true]{opacity:.6;pointer-events:none}
   <img src="img/d-09.webp" alt="" width="1440" height="1000" loading="lazy">
   <img src="img/d-10.webp" alt="" width="1440" height="578" loading="lazy">
   <div class="band" aria-hidden="true"></div>
+  <div class="garage-art" id="garage-desktop">
+    <div class="garage-art__picture"><img src="img/garage-print.webp" width="1774" height="887" loading="lazy" alt="Garage du funk · фасад с мятной дверью"></div>
+    <button type="button" aria-label="Свет окон и гирлянды" aria-pressed="false" hidden><span class="garage-art__status">Свет выключен</span></button>
+  </div>
   <div class="toast-stage" aria-hidden="true">
     <div class="paper-confetti"></div>
     <img class="toast-glass" src="img/toast-cutout.webp" width="437" height="500" alt="" loading="lazy">
@@ -210,6 +190,8 @@ button.o.bt[aria-busy=true]{opacity:.6;pointer-events:none}
   <div class="mq" style="--x:-80;--y:800;--w:1600;--h:64;--r:2deg;--fs:20" aria-hidden="true"><span class="mqt"></span></div>
   <button class="o egg" type="button" data-egg="music-ball" aria-label="Покрутить диско-шар" style="--x:1210;--y:42;--w:218;--h:210"></button>
   <button class="o egg" type="button" data-egg="microphone" aria-label="Включить микрофон" style="--x:625;--y:530;--w:166;--h:220"></button>
+  <button class="o egg" type="button" data-egg="wink" aria-label="Маша, подмигни" style="--x:869;--y:208;--w:277;--h:248"></button>
+  <span class="wink-lid" aria-hidden="true"></span>
   <button class="o egg" type="button" data-egg="candles" aria-label="Свечи на торте" aria-pressed="false" style="--x:1120;--y:555;--w:210;--h:235"></button>
   <button class="o egg" type="button" data-egg="stamp" aria-label="Поставить штемпель на открытку" style="--x:1090;--y:6100;--w:184;--h:184">
     <span class="stamp-mark" aria-hidden="true">Доставлено лично · 07.12</span>
@@ -271,6 +253,8 @@ button.o.bt[aria-busy=true]{opacity:.6;pointer-events:none}
       <img class="confetti" src="img/x-72_218.webp" alt="">
       <button class="egg" type="button" data-egg="music-ball" aria-label="Покрутить диско-шар"></button>
       <button class="egg" type="button" data-egg="microphone" aria-label="Включить микрофон"></button>
+      <button class="egg" type="button" data-egg="wink" aria-label="Маша, подмигни"></button>
+      <span class="wink-lid" aria-hidden="true"></span>
       <button class="egg" type="button" data-egg="candles" aria-label="Свечи на торте" aria-pressed="false"></button>
     </div>
     <p>Привет! Раз ты здесь, значит, мы с тобой уже знакомы. Но на всякий случай: я Маша, и я зову тебя на свой день рождения!</p>
@@ -301,8 +285,9 @@ button.o.bt[aria-busy=true]{opacity:.6;pointer-events:none}
     </h2>
     <p class="caption event-caption"><span class="sr">18:00–22:30</span><img src="img/mobile-v2/time.webp" width="267" height="51" alt="">Советская, 51А/2</p>
     <p>Приходи, когда удобно. Вход по открыткам, сделанным своими руками!</p>
-    <div class="garage-scene">
-      <img class="garage" src="img/mobile-v2/garage.webp" width="650" height="303" alt="Фасад Garage du funk" loading="lazy">
+    <div class="garage-art" id="garage-mobile">
+      <div class="garage-art__picture"><img src="img/garage-print.webp" width="1774" height="887" loading="lazy" alt="Garage du funk · фасад с мятной дверью"></div>
+      <button type="button" aria-label="Свет окон и гирлянды" aria-pressed="false" hidden><span class="garage-art__status">Свет выключен</span></button>
     </div>
   </section>
   <section class="program" id="m-program">
@@ -426,8 +411,7 @@ button.o.bt[aria-busy=true]{opacity:.6;pointer-events:none}
 
 <canvas id="boom" aria-hidden="true"></canvas>
 <script type="application/json" id="hwdata">{"d":{"b":[[62,63,116,17,1,1188,2665],[0,126,773,269,2,0,832],[61,408,558,195,1,900,1103],[66,666,405,100,1,892,1902],[62,1015,187,17,1,0,2686],[65,1144,510,121,1,0,1779],[266,1225,450,108,1,512,1779],[61,1436,641,317,1,464,503],[20,1810,1420,501,1,0,0],[62,2131,177,19,1,896,2637],[59,2370,403,75,1,0,2190],[788,2370,605,69,1,0,2267],[59,2435,478,49,1,396,2402],[1079,2442,268,62,1,900,2267],[64,2526,273,56,1,1077,2338],[784,2580,474,43,1,993,2402],[66,2591,333,33,1,246,2505],[1006,2612,387,61,1,364,2338],[524,2712,143,56,1,0,2402],[62,3373,146,17,1,189,2686],[81,3500,493,142,1,877,1494],[843,3511,426,87,1,753,2008],[118,3750,41,19,1,1075,2637],[550,3750,41,19,1,1118,2637],[982,3789,41,19,1,1161,2637],[130,3797,322,60,1,753,2338],[576,3797,288,28,1,655,2577],[551,3852,339,205,1,559,1103],[126,3870,341,154,1,1091,1312],[1025,4000,251,31,1,350,2543],[993,4061,320,154,1,0,1494],[550,4400,41,19,1,1290,2637],[118,4439,41,19,1,1204,2637],[982,4439,41,19,1,1247,2637],[614,4446,210,33,1,827,2505],[562,4508,316,127,1,324,1650],[164,4524,244,33,1,581,2505],[1072,4526,160,31,1,603,2543],[135,4564,305,180,1,0,1312],[990,4578,322,127,1,0,1650],[722,5012,147,19,1,1333,2637],[724,5091,442,166,1,647,1312],[721,5293,557,207,1,0,1103],[915,5555,368,74,1,405,2190],[62,5868,166,19,1,0,2665],[494,5907,227,43,1,0,2460],[764,5942,101,32,1,1039,2505],[602,5950,150,28,1,945,2577],[142,6082,51,15,1,1011,2686],[742,6082,51,15,1,1064,2686],[174,6127,462,327,1,0,503],[768,6137,348,32,1,0,2543],[769,6282,45,17,1,337,2686],[770,6305,338,39,1,361,2460],[768,6352,87,15,1,1117,2686],[769,6375,206,39,1,701,2460],[769,6422,27,17,1,384,2686],[773,6445,451,37,1,909,2460],[769,6492,70,15,1,1206,2686],[773,6514,244,36,1,0,2505],[356,6516,130,39,1,229,2460],[354,6551,115,46,1,876,2402],[148,6811,425,88,1,326,2008],[836,6815,320,78,1,1124,2101],[890,6914,335,21,1,230,2637],[163,6955,250,26,1,657,2608],[890,6961,269,26,1,909,2608],[164,7001,242,27,1,1097,2577],[890,7008,262,26,1,1180,2608],[162,7048,182,27,1,0,2608],[890,7054,300,27,1,184,2608],[890,7102,327,21,1,567,2637],[641,7433,156,19,1,168,2665],[436,7592,612,104,1,0,1902],[459,7728,569,30,1,765,2543],[62,8209,126,17,1,413,2686],[73,8270,710,127,1,642,1650],[745,8458,603,87,1,0,2101],[70,8459,517,86,1,605,2101],[145,8570,553,146,1,322,1494],[62,9058,106,17,1,541,2686],[68,9114,439,72,1,775,2190],[1021,9142,291,65,1,607,2267],[685,9173,169,27,1,486,2608],[61,9214,494,236,1,775,832],[683,9356,228,26,1,0,2637],[1034,9571,324,91,1,0,2008],[683,9592,249,53,1,145,2402],[65,10140,338,179,1,307,1312],[479,10217,276,103,1,614,1902],[62,10427,562,19,1,326,2665],[1021,10517,296,18,1,890,2665]],"sz":[1480,2720],"k":1,"src":"img/d-text.webp"}}</script>
-<script type="application/json" id="dcdata">{"dsec":[[0,920],[920,1140],[2060,1218],[3278,1615],[4893,880],[5773,1521],[7294,820],[8114,849],[8963,1055],[10018,560]],"d":[{"f":"img/x-5_50.webp","x":510,"y":654,"w":60,"h":60,"a":"spin","d":0.08,"s":0,"m":false},{"f":"img/x-5_62.webp","x":1210,"y":0,"w":225.3,"h":267.9,"a":"swing","d":0,"s":0,"m":false},{"f":"img/x-38_1563.webp","x":739,"y":251,"w":69,"h":90,"a":"float","d":0.06,"s":0,"m":false},{"f":"img/x-72_218.webp","x":1292.4,"y":451,"w":79.2,"h":79.2,"a":"float","d":0.1,"s":0,"m":false},{"f":"img/x-24_762.webp","x":667,"y":672,"w":148,"h":116,"a":"nudge","d":0.02,"s":2,"m":false},{"f":"img/x-21_929.webp","x":525,"y":453.4,"w":68,"h":76.7,"a":"beat","d":0.04,"s":2,"m":false},{"f":"img/x-6_359.webp","x":40,"y":640,"w":48,"h":48,"a":"spin","d":0.08,"s":2,"m":false},{"f":"img/x-73_701.webp","x":113.2,"y":927.1,"w":99.3,"h":99.3,"a":"spin","d":0.06,"s":1,"m":false},{"f":"img/x-72_222.webp","x":1235.1,"y":174,"w":57.8,"h":57.8,"a":"float","d":0.1,"s":2,"m":false},{"f":"img/x-72_228.webp","x":440,"y":1531,"w":46.3,"h":46.3,"a":"float","d":0.12,"s":3,"m":false},{"f":"img/x-6_494.webp","x":92.8,"y":136.8,"w":594.2,"h":594.2,"a":"spinslow","d":0.04,"s":4,"m":false},{"f":"img/x-28_562.webp","x":0,"y":360,"w":526,"h":520,"a":"glimmer","d":0,"s":4,"m":false},{"f":"img/x-6_495.webp","x":1172,"y":0,"w":254,"h":299.9,"a":"swing","d":0,"s":4,"m":false},{"f":"img/x-72_224.webp","x":93,"y":149.4,"w":59.3,"h":59.3,"a":"float","d":0.1,"s":4,"m":false},{"f":"img/x-72_226.webp","x":577.3,"y":651,"w":57.4,"h":57.4,"a":"float","d":0.12,"s":4,"m":false},{"f":"img/x-8_449.webp","x":1049,"y":440,"w":200.8,"h":81,"a":"drift","d":0.02,"s":5,"m":false},{"f":"img/x-28_444.webp","x":924,"y":1449,"w":44.6,"h":44.6,"a":"float","d":0.08,"s":5,"m":false},{"f":"img/x-72_230.webp","x":1293.5,"y":260,"w":62.2,"h":62.2,"a":"float","d":0.1,"s":5,"m":false},{"f":"img/x-72_232.webp","x":82,"y":880.3,"w":48.5,"h":48.5,"a":"float","d":0.12,"s":5,"m":false},{"f":"img/x-33_1415.webp","x":971,"y":0,"w":469,"h":234.9,"a":"glimmer","d":0,"s":6,"m":false},{"f":"img/x-38_1528.webp","x":1100,"y":741.7,"w":56.5,"h":56.5,"a":"float","d":0.08,"s":7,"m":false},{"f":"img/x-38_1524.webp","x":1387.2,"y":548.3,"w":42.7,"h":42.7,"a":"float","d":0.12,"s":7,"m":false},{"f":"img/x-38_1526.webp","x":1338.9,"y":734.7,"w":56.3,"h":56.3,"a":"float","d":0.06,"s":7,"m":false},{"f":"img/x-38_1522.webp","x":75,"y":645,"w":45.2,"h":45.2,"a":"float","d":0.1,"s":7,"m":false},{"f":"img/x-8_762.webp","x":1290,"y":20.9,"w":127.4,"h":127.4,"a":"spin","d":0.06,"s":9,"m":false},{"f":"img/x-28_564.webp","x":620,"y":0,"w":675,"h":560,"a":"glimmer","d":0,"s":9,"m":false},{"f":"img/x-72_236.webp","x":942,"y":87.6,"w":50.4,"h":50.4,"a":"float","d":0.1,"s":9,"m":false},{"f":"img/x-38_1530.webp","x":1194.3,"y":8912.1,"w":55.7,"h":55.7,"a":"float","d":0.09,"s":-1,"m":false},{"f":"img/x-72_220.webp","x":612,"y":181.4,"w":46.5,"h":46.5,"a":"float","d":0.1,"s":1,"m":false},{"f":"img/mobile-v2/mic.webp","x":607,"y":507,"w":245.7,"h":332.5,"a":"sway","d":0.03,"s":0,"m":false},{"f":"img/x-26_939.webp","x":6.1,"y":25,"w":1424.9,"h":790.7,"a":"float","d":0.07,"s":0,"m":false}],"db":{"38:1532":["img/x-38_1532.webp",895,8721,395,89],"8:469":["img/x-8_469.webp",770,6603,159,58],"8:694":["img/x-8_694.webp",640,7790,159,58],"8:751":["img/x-8_751.webp",689.5,9749.8,208,58]}}</script>
-<script type="application/json" id="gardata">{"d":{"w":[{"f":"img/gd-win-l.webp","p":"img/gd-win-l-p.webp","x":137,"y":2977,"w":388,"h":194},{"f":"img/gd-win-g.webp","p":"img/gd-win-g-p.webp","x":676,"y":2982,"w":116,"h":218},{"f":"img/gd-win-s.webp","p":"img/gd-win-s-p.webp","x":801,"y":2983,"w":502,"h":216}],"b":[[142,2949.6],[166,2954.4],[190,2954.4],[214,2949.6],[262,2949.6],[286,2954.4],[310,2954.4],[334,2949.6],[382,2949.6],[406,2954.4],[430,2954.4],[454,2949.6],[502,2949.6],[526,2954.4],[550,2954.4],[574,2949.6],[622,2949.6],[646,2954.4],[670,2954.4],[694,2949.6],[742,2949.6],[766,2954.4],[790,2954.4],[814,2949.6],[862,2949.6],[886,2954.4],[910,2954.4],[934,2949.6],[982,2949.6],[1006,2954.4],[1030,2954.4],[1054,2949.6],[1102,2949.6],[1126,2954.4],[1150,2954.4],[1174,2949.6],[1222,2949.6],[1246,2954.4],[1270,2954.4],[1294,2949.6]],"r":6.5}}</script>
+<script type="application/json" id="dcdata">{"dsec":[[0,920],[920,1140],[2060,1218],[3278,1615],[4893,880],[5773,1521],[7294,820],[8114,849],[8963,1055],[10018,560]],"d":[{"f":"img/x-5_50.webp","x":510,"y":654,"w":60,"h":60,"a":"spin","d":0.08,"s":0,"m":false},{"f":"img/x-5_62.webp","x":1210,"y":0,"w":225.3,"h":267.9,"a":"swing","d":0,"s":0,"m":false},{"f":"img/x-38_1563.webp","x":739,"y":251,"w":69,"h":90,"a":"float","d":0.06,"s":0,"m":false},{"f":"img/x-72_218.webp","x":1292.4,"y":451,"w":79.2,"h":79.2,"a":"float","d":0.1,"s":0,"m":false},{"f":"img/x-21_929.webp","x":525,"y":453.4,"w":68,"h":76.7,"a":"beat","d":0.04,"s":2,"m":false},{"f":"img/x-6_359.webp","x":40,"y":640,"w":48,"h":48,"a":"spin","d":0.08,"s":2,"m":false},{"f":"img/x-73_701.webp","x":113.2,"y":927.1,"w":99.3,"h":99.3,"a":"spin","d":0.06,"s":1,"m":false},{"f":"img/x-72_222.webp","x":1235.1,"y":174,"w":57.8,"h":57.8,"a":"float","d":0.1,"s":2,"m":false},{"f":"img/x-72_228.webp","x":440,"y":1531,"w":46.3,"h":46.3,"a":"float","d":0.12,"s":3,"m":false},{"f":"img/x-6_494.webp","x":92.8,"y":136.8,"w":594.2,"h":594.2,"a":"spinslow","d":0.04,"s":4,"m":false},{"f":"img/x-28_562.webp","x":0,"y":360,"w":526,"h":520,"a":"glimmer","d":0,"s":4,"m":false},{"f":"img/x-6_495.webp","x":1172,"y":0,"w":254,"h":299.9,"a":"swing","d":0,"s":4,"m":false},{"f":"img/x-72_224.webp","x":93,"y":149.4,"w":59.3,"h":59.3,"a":"float","d":0.1,"s":4,"m":false},{"f":"img/x-72_226.webp","x":577.3,"y":651,"w":57.4,"h":57.4,"a":"float","d":0.12,"s":4,"m":false},{"f":"img/x-8_449.webp","x":1049,"y":440,"w":200.8,"h":81,"a":"drift","d":0.02,"s":5,"m":false},{"f":"img/x-28_444.webp","x":924,"y":1449,"w":44.6,"h":44.6,"a":"float","d":0.08,"s":5,"m":false},{"f":"img/x-72_230.webp","x":1293.5,"y":260,"w":62.2,"h":62.2,"a":"float","d":0.1,"s":5,"m":false},{"f":"img/x-72_232.webp","x":82,"y":880.3,"w":48.5,"h":48.5,"a":"float","d":0.12,"s":5,"m":false},{"f":"img/x-33_1415.webp","x":971,"y":0,"w":469,"h":234.9,"a":"glimmer","d":0,"s":6,"m":false},{"f":"img/x-38_1528.webp","x":1100,"y":741.7,"w":56.5,"h":56.5,"a":"float","d":0.08,"s":7,"m":false},{"f":"img/x-38_1524.webp","x":1387.2,"y":548.3,"w":42.7,"h":42.7,"a":"float","d":0.12,"s":7,"m":false},{"f":"img/x-38_1526.webp","x":1338.9,"y":734.7,"w":56.3,"h":56.3,"a":"float","d":0.06,"s":7,"m":false},{"f":"img/x-38_1522.webp","x":75,"y":645,"w":45.2,"h":45.2,"a":"float","d":0.1,"s":7,"m":false},{"f":"img/x-8_762.webp","x":1290,"y":20.9,"w":127.4,"h":127.4,"a":"spin","d":0.06,"s":9,"m":false},{"f":"img/x-28_564.webp","x":620,"y":0,"w":675,"h":560,"a":"glimmer","d":0,"s":9,"m":false},{"f":"img/x-72_236.webp","x":942,"y":87.6,"w":50.4,"h":50.4,"a":"float","d":0.1,"s":9,"m":false},{"f":"img/x-38_1530.webp","x":1194.3,"y":8912.1,"w":55.7,"h":55.7,"a":"float","d":0.09,"s":-1,"m":false},{"f":"img/x-72_220.webp","x":612,"y":181.4,"w":46.5,"h":46.5,"a":"float","d":0.1,"s":1,"m":false},{"f":"img/mobile-v2/mic.webp","x":607,"y":507,"w":245.7,"h":332.5,"a":"sway","d":0.03,"s":0,"m":false},{"f":"img/x-26_939.webp","x":6.1,"y":25,"w":1424.9,"h":790.7,"a":"float","d":0.07,"s":0,"m":false}],"db":{"38:1532":["img/x-38_1532.webp",895,8721,395,89],"8:469":["img/x-8_469.webp",770,6603,159,58],"8:694":["img/x-8_694.webp",640,7790,159,58],"8:751":["img/x-8_751.webp",689.5,9749.8,208,58]}}</script>
 <script>
 {
   // ---------- static text layer
@@ -619,74 +603,6 @@ button.o.bt[aria-busy=true]{opacity:.6;pointer-events:none}
     if (!raf) bctx.clearRect(0, 0, innerWidth, innerHeight);
   }
 
-  // ---------- garage lights
-  if ('IntersectionObserver' in window) {
-    const GR = JSON.parse(document.getElementById('gardata').textContent);
-    function mountGarageLights(scene, probe, G) {
-      const gar = document.createElement('div'); gar.className = 'gar'; gar.setAttribute('aria-hidden', 'true');
-      G.b.forEach(([x, y], i) => {
-        const dl = (i * 0.035).toFixed(3) + 's';
-        for (const c of ['gh', 'gb']) { const e = document.createElement('i'); e.className = c; e.style.cssText = `--x:${x};--y:${y};--r:${G.r};--dl:${dl}`; gar.appendChild(e); }
-      });
-      const t0 = G.b.length * 0.035;
-      G.w.forEach((w, i) => {
-        const d = document.createElement('div'); d.className = 'gw';
-        d.style.cssText = `--x:${w.x};--y:${w.y};--w:${w.w};--h:${w.h};--dl:${(t0 * .5 + i * 0.35).toFixed(2)}s`;
-        const im = new Image(); im.src = w.f; im.alt = ''; d.appendChild(im);
-        const pp = document.createElement('div'); pp.className = 'gp';
-        pp.style.cssText = `--x:${w.x};--y:${w.y};--w:${w.w};--h:${w.h}`;
-        const pi = new Image(); pi.src = w.p; pi.alt = ''; pp.appendChild(pi);
-        const fx = [['amb', 'pk', 'sp'], ['gr', 'sp'], ['vi', 'pk', 'amb', 'sp']][i] || [];
-        fx.forEach((c, j) => { const e = document.createElement('i'); e.className = c; e.style.setProperty('--dl', (t0 * .5 + i * 0.35 + .5 + j * .25).toFixed(2) + 's'); pp.appendChild(e); });
-        const guests = document.createElement('span');
-        guests.className = 'garage-guests';
-        const placements = [
-          [[11,22,59,'curly'],[30,22,67,'glass'],[67,16,55,'profile']],
-          [[26,51,49,'profile']],
-          [[15,19,54,'glass'],[59,15,58,'profile'],[74,19,64,'curly']],
-        ][i];
-        placements.forEach(([x, width, height, pose], index) => {
-          const svgNS = 'http://www.w3.org/2000/svg';
-          const guest = document.createElementNS(svgNS, 'svg');
-          guest.setAttribute('class', 'garage-guest');
-          guest.setAttribute('viewBox', '0 0 64 100');
-          guest.style.cssText = `--guest-x:${x}%;--guest-w:${width}%;--guest-h:${height}%;--guest-delay:${-index * .8 - i * .6}s`;
-          const silhouette = document.createElementNS(svgNS, 'use');
-          silhouette.setAttribute('href', 'img/garage-guests.svg#' + pose);
-          guest.appendChild(silhouette);
-          guests.appendChild(guest);
-        });
-        pp.appendChild(guests);
-        gar.appendChild(pp); gar.appendChild(d);
-      });
-      const note = document.createElement('span');
-      note.className = 'garage-note';
-      note.textContent = 'Свои уже здесь';
-      note.style.setProperty('--y', Math.min(...G.w.map(w => w.y)) - 108);
-      gar.appendChild(note);
-      scene.appendChild(gar);
-      new IntersectionObserver(es => es.forEach(e => {
-        if (e.isIntersecting) { gar.classList.remove('off'); gar.classList.add('on'); }
-        else if (e.boundingClientRect.top > 0) { gar.classList.remove('on'); gar.classList.add('off'); }
-      }), { rootMargin: '0px 0px -20% 0px', threshold: 0.3 }).observe(probe);
-    }
-    if (!reduce) {
-      const y0 = Math.min(...GR.d.w.map(w => w.y)) - 40;
-      const y1 = Math.max(...GR.d.w.map(w => w.y + w.h));
-      const probe = document.createElement('span'); probe.className = 'anchor';
-      probe.style.cssText = `top:calc(${y0}*var(--u));height:calc(${y1 - y0}*var(--u));width:100%`;
-      desktop.appendChild(probe);
-      mountGarageLights(desktop, probe, GR.d);
-    }
-    // Origin of the desktop facade in the source collage, before it was exported as a standalone image.
-    const originX = 118, originY = 2672;
-    const mobileGarage = document.querySelector('.garage-scene');
-    mountGarageLights(mobileGarage, mobileGarage, {
-      r: GR.d.r,
-      b: GR.d.b.map(([x, y]) => [x - originX, y - originY]),
-      w: GR.d.w.map(w => ({...w, x:w.x - originX, y:w.y - originY})),
-    });
-  }
 
   // ---------- links, marquee
   const EVENT = new Date('2026-12-07T18:00:00+05:00'), TZ = 'Asia/Yekaterinburg';
