@@ -22,16 +22,21 @@ function say(message, withSongLink = false) {
   if (!withSongLink) toastTimer = setTimeout(closeToast, 5000);
 }
 
+function loadMusicPlayer() {
+  if (!musicFrame.hasAttribute('src')) musicFrame.src = musicFrame.dataset.src;
+}
+
 function showMusicPlayer(open) {
-  musicPlayer.hidden = !open;
+  musicPlayer.inert = !open;
   musicToggle.setAttribute('aria-expanded', String(open));
   musicLabel.textContent = open ? 'Скрыть плеер' : 'Включить музыку';
-  if (open && !musicFrame.hasAttribute('src')) musicFrame.src = musicFrame.dataset.src;
+  if (open) loadMusicPlayer();
   (open ? musicHide : musicToggle).focus({preventScroll:true});
 }
 
 musicToggle.hidden = false;
-musicToggle.addEventListener('click', () => showMusicPlayer(musicPlayer.hidden));
+window.addEventListener('load', loadMusicPlayer, {once:true});
+musicToggle.addEventListener('click', () => showMusicPlayer(musicPlayer.inert));
 musicHide.addEventListener('click', () => showMusicPlayer(false));
 musicPlayer.addEventListener('keydown', event => {
   if (event.key === 'Escape') showMusicPlayer(false);
