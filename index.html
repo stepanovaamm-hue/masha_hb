@@ -5,9 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Маша · birthday residency</title>
 <meta name="description" content="Гаражный квартирник: 7 декабря, 18:00–22:30, Garage du funk, Советская 51А/2, Пермь. Вход по самодельным открыткам.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Martian+Mono&family=Onest:wght@400;500&family=Open+Sans&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="fonts/fonts.css">
 <style>
 /*
 VOICE: тёплое приглашение на гаражный квартирник — ровно как макет в Figma
@@ -161,7 +159,7 @@ a.o.bt:active,button.o.bt:active{scale:.95;translate:0 0;rotate:0deg}
 .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
 button.o.bt[aria-busy=true]{opacity:.6;pointer-events:none}
 </style>
-<link rel="stylesheet" href="mobile.css">
+<link rel="stylesheet" href="mobile.css?v=garage-lights">
 <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
@@ -253,14 +251,14 @@ button.o.bt[aria-busy=true]{opacity:.6;pointer-events:none}
     <img class="hero-title" src="img/mobile-v2/title.webp" width="650" height="216" alt="">
     <div class="hero-art" aria-hidden="true">
       <img class="child" src="img/mobile-v2/child.webp" width="597" height="650" alt="" fetchpriority="high">
-      <img class="mic" src="img/x-5_68.webp" alt="">
+      <img class="mic" src="img/mobile-v2/mic.webp" width="246" height="333" alt="">
       <img class="disco" src="img/x-5_62.webp" alt="">
       <img class="confetti" src="img/x-72_218.webp" alt="">
     </div>
     <p>Привет! Раз ты здесь, значит, мы с тобой уже знакомы. Но на всякий случай: я Маша, и я зову тебя на свой день рождения!</p>
     <p>В этом году мне хочется отметить его немного необычно: собрать в одном месте людей из разных частей моей жизни, познакомить вас друг с другом, поиграть и вдоволь наговориться.</p>
   </section>
-  <div class="ribbon">любимые люди ✱ любимые песни ✱ много блёсток</div>
+  <div class="intro-ribbon" aria-hidden="true"><span class="mqt"></span></div>
   <section class="blue" id="m-about">
     <p class="k">02 ✱ про вечеринку</p>
     <h2 class="art-title about-title"><span class="sr">Хочу собрать всех своих</span>
@@ -273,24 +271,33 @@ button.o.bt[aria-busy=true]{opacity:.6;pointer-events:none}
     <p>С кем-то из вас я вижусь почти каждый день, а с кем-то мы уже давно собираемся встретиться.</p>
     <p>И мне давно хочется оказаться со всеми вами в одном пространстве. Кажется, день рождения — отличный для этого повод.</p>
   </section>
+  <div class="ribbon-wrap" aria-hidden="true">
+    <img class="ribbon-shape" src="img/mobile-v2/ribbon.webp" width="1400" height="532" alt="">
+    <img class="ribbon-text" src="img/mobile-v2/ribbontext.webp" width="1400" height="495" alt="">
+  </div>
   <section>
     <p class="k">03 ✱ дата и место</p>
-    <h2>7 декабря<br>в Garage du funk</h2>
-    <p class="caption">18:00–22:30 · Советская, 51А/2</p>
+    <h2 class="art-title event-title"><span class="sr">7 декабря в Garage du funk</span>
+      <img src="img/mobile-v2/date.webp" width="398" height="69" alt="">
+      <img src="img/mobile-v2/venue.webp" width="599" height="63" alt="">
+    </h2>
+    <p class="caption event-caption"><span class="sr">18:00–22:30</span><img src="img/mobile-v2/time.webp" width="267" height="51" alt="">Советская, 51А/2</p>
     <p>Приходи, когда удобно. Вход по открыткам, сделанным своими руками!</p>
-    <img class="garage" src="img/mobile-v2/garage.webp" width="650" height="303" alt="Фасад Garage du funk" loading="lazy">
+    <div class="garage-scene">
+      <img class="garage" src="img/mobile-v2/garage.webp" width="650" height="303" alt="Фасад Garage du funk" loading="lazy">
+    </div>
   </section>
   <section class="program" id="m-program">
     <p class="k">04 ✱ программа</p>
     <h2 class="art-title"><span class="sr">Чем будем заниматься?</span><img src="img/mobile-v2/program-title.webp" width="488" height="136" alt="" loading="lazy"></h2>
     <p>В произвольном порядке и с перерывами на поболтать.</p>
     <ol class="program-list">
-      <li><span class="k">01 /</span><img src="img/mobile-v2/invitation.webp" alt="" loading="lazy"><h3>Вход по самодельной открытке</h3><p>В этом году хочу собрать коллекцию самодельных открыток от друзей.</p><p>Рисуй, вырезай, клей, пиши — формат любой! Если не успеешь дома, сделаешь открытку прямо в гараже.</p></li>
-      <li><span class="k">02 /</span><img src="img/mobile-v2/snacks.webp" alt="" loading="lazy"><h3>Напитки и закуски</h3><p>Будет вкусно! За закуски и напитки отвечают ребята из Garage du funk. В бокалах — игристое и безалкогольные напитки.</p><p>Будем угощаться, поднимать бокалы, болтать и наслаждаться вечером.</p></li>
-      <li><span class="k">03 /</span><img src="img/mobile-v2/bingo.webp" alt="" loading="lazy"><h3>Сыграем в бинго</h3><p>Очень люблю всякие игры, поэтому без них не обойдётся.</p><p>Сыграем в бинго, немного поазартничаем и разыграем подарочки.</p></li>
-      <li><span class="k">04 /</span><h3>Будем блестеть</h3><p>Потому что блёстки — это всегда хорошая идея. Особенно в понедельник.</p><p>Если захочется добавить немного сияния, всё необходимое будет на вечеринке.</p></li>
-      <li><span class="k">06 /</span><img src="img/mobile-v2/together.webp" alt="" loading="lazy"><h3>Будем вместе</h3><p>Знакомиться, обниматься, разговаривать обо всём на свете. И наконец-то увидеться с теми, с кем мы уже давно собираемся это сделать.</p></li>
-      <li><span class="k">05 /</span><h3>Подарочки</h3><p>День рождения у меня, а подарочки будут и у вас!</p><p>Люблю не только получать, но и дарить.</p></li>
+      <li><span class="k">01 /</span><img class="card-art" src="img/mobile-v2/invitation.webp" alt="" loading="lazy"><h3 class="card-title"><span class="sr">Вход по самодельной открытке</span><img src="img/mobile-v2/card1.webp" width="317" height="55" alt="" loading="lazy"></h3><p>В этом году хочу собрать коллекцию самодельных открыток от друзей.</p><p>Рисуй, вырезай, клей, пиши — формат любой! Если не успеешь дома, сделаешь открытку прямо в гараже.</p></li>
+      <li><span class="k">02 /</span><img class="card-art" src="img/mobile-v2/snacks.webp" alt="" loading="lazy"><h3 class="card-title"><span class="sr">Напитки и закуски</span><img src="img/mobile-v2/card2.webp" width="282" height="22" alt="" loading="lazy"></h3><p>Будет вкусно! За закуски и напитки отвечают ребята из Garage du funk. В бокалах — игристое и безалкогольные напитки.</p><p>Будем угощаться, поднимать бокалы, болтать и наслаждаться вечером.</p></li>
+      <li><span class="k">03 /</span><img class="card-art" src="img/mobile-v2/bingo.webp" alt="" loading="lazy"><h3 class="card-title"><span class="sr">Сыграем в бинго</span><img src="img/mobile-v2/card3.webp" width="246" height="25" alt="" loading="lazy"></h3><p>Очень люблю всякие игры, поэтому без них не обойдётся.</p><p>Сыграем в бинго, немного поазартничаем и разыграем подарочки.</p></li>
+      <li><span class="k">04 /</span><h3 class="card-title"><span class="sr">Будем блестеть</span><img src="img/mobile-v2/card4.webp" width="239" height="27" alt="" loading="lazy"></h3><p>Потому что блёстки — это всегда хорошая идея. Особенно в понедельник.</p><p>Если захочется добавить немного сияния, всё необходимое будет на вечеринке.</p></li>
+      <li><span class="k">06 /</span><img class="card-art" src="img/mobile-v2/together.webp" alt="" loading="lazy"><h3 class="card-title"><span class="sr">Будем вместе</span><img src="img/mobile-v2/card5.webp" width="204" height="27" alt="" loading="lazy"></h3><p>Знакомиться, обниматься, разговаривать обо всём на свете. И наконец-то увидеться с теми, с кем мы уже давно собираемся это сделать.</p></li>
+      <li><span class="k">05 /</span><h3 class="card-title"><span class="sr">Подарочки</span><img src="img/mobile-v2/card6.webp" width="155" height="25" alt="" loading="lazy"></h3><p>День рождения у меня, а подарочки будут и у вас!</p><p>Люблю не только получать, но и дарить.</p></li>
     </ol>
   </section>
   <section class="dress">
@@ -311,7 +318,7 @@ button.o.bt[aria-busy=true]{opacity:.6;pointer-events:none}
       <p>Буду очень рада тебя видеть!</p>
       <p>Обнимаю,<br>Маша ♡</p>
       <hr>
-      <h3>Гаражная вечеринка</h3>
+      <h3 class="card-title"><span class="sr">Гаражная вечеринка</span><img src="img/mobile-v2/posttitle.webp" width="342" height="26" alt=""></h3>
       <p>7 декабря 2026, понедельник<br>с 18:00 до 22:30<br>Garage du funk, Советская ул., 51А/2</p>
       <p><a href="https://t.me/maru_stepanova">@maru_stepanova</a></p>
       <a class="mbtn ghost maps" href="https://yandex.ru/maps/?text=%D0%9F%D0%B5%D1%80%D0%BC%D1%8C%2C%20%D0%A1%D0%BE%D0%B2%D0%B5%D1%82%D1%81%D0%BA%D0%B0%D1%8F%2051%D0%90%2F2">как добраться</a>
@@ -554,11 +561,10 @@ button.o.bt[aria-busy=true]{opacity:.6;pointer-events:none}
   }
 
   // ---------- garage lights
-  if (!reduce && 'IntersectionObserver' in window) {
+  if ('IntersectionObserver' in window) {
     const GR = JSON.parse(document.getElementById('gardata').textContent);
-    {
-      const set = 'd', main = desktop;
-      const G = GR[set], gar = document.createElement('div'); gar.className = 'gar'; gar.setAttribute('aria-hidden', 'true');
+    function mountGarageLights(scene, probe, G) {
+      const gar = document.createElement('div'); gar.className = 'gar'; gar.setAttribute('aria-hidden', 'true');
       G.b.forEach(([x, y], i) => {
         const dl = (i * 0.035).toFixed(3) + 's';
         for (const c of ['gh', 'gb']) { const e = document.createElement('i'); e.className = c; e.style.cssText = `--x:${x};--y:${y};--r:${G.r};--dl:${dl}`; gar.appendChild(e); }
@@ -575,16 +581,28 @@ button.o.bt[aria-busy=true]{opacity:.6;pointer-events:none}
         fx.forEach((c, j) => { const e = document.createElement('i'); e.className = c; e.style.setProperty('--dl', (t0 * .5 + i * 0.35 + .5 + j * .25).toFixed(2) + 's'); pp.appendChild(e); });
         gar.appendChild(pp); gar.appendChild(d);
       });
-      main.appendChild(gar);
-      const y0 = Math.min(...G.w.map(w => w.y)) - 40, y1 = Math.max(...G.w.map(w => w.y + w.h));
-      const probe = document.createElement('span'); probe.className = 'anchor';
-      probe.style.cssText = `top:calc(${y0}*var(--u));height:calc(${y1 - y0}*var(--u));width:100%`;
-      main.appendChild(probe);
+      scene.appendChild(gar);
       new IntersectionObserver(es => es.forEach(e => {
         if (e.isIntersecting) { gar.classList.remove('off'); gar.classList.add('on'); }
         else if (e.boundingClientRect.top > 0) { gar.classList.remove('on'); gar.classList.add('off'); }
       }), { rootMargin: '0px 0px -20% 0px', threshold: 0.3 }).observe(probe);
     }
+    if (!reduce) {
+      const y0 = Math.min(...GR.d.w.map(w => w.y)) - 40;
+      const y1 = Math.max(...GR.d.w.map(w => w.y + w.h));
+      const probe = document.createElement('span'); probe.className = 'anchor';
+      probe.style.cssText = `top:calc(${y0}*var(--u));height:calc(${y1 - y0}*var(--u));width:100%`;
+      desktop.appendChild(probe);
+      mountGarageLights(desktop, probe, GR.d);
+    }
+    // Origin of the desktop facade in the source collage, before it was exported as a standalone image.
+    const originX = 118, originY = 2672;
+    const mobileGarage = document.querySelector('.garage-scene');
+    mountGarageLights(mobileGarage, mobileGarage, {
+      r: GR.d.r,
+      b: GR.d.b.map(([x, y]) => [x - originX, y - originY]),
+      w: GR.d.w.map(w => ({...w, x:w.x - originX, y:w.y - originY})),
+    });
   }
 
   // ---------- links, marquee

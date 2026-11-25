@@ -38,13 +38,22 @@
 .hero-art img{position:absolute}
 .hero-art .child{width:73%;right:7%;bottom:0;height:94%;object-fit:contain;object-position:bottom}
 .hero-art .disco{width:23%;right:2%;top:-2%;transform-origin:50% 0;animation:swing 4s ease-in-out infinite alternate}
-.hero-art .mic{width:26%;left:4%;bottom:0;rotate:-8deg;mix-blend-mode:multiply}
+.hero-art .mic{width:27%;left:4%;bottom:0}
 .hero-art .confetti{width:14%;left:6%;top:8%;rotate:18deg}
-.mobile-invite .ribbon{position:relative;background:var(--pink);padding:12px 16px;margin:0 -8px;border-block:1px solid var(--ink);rotate:-2deg;text-align:center;font:400 11px/1.5 "Martian Mono",monospace;text-transform:uppercase;z-index:1}
+.mobile-invite .intro-ribbon{position:relative;background:var(--pink);padding:7px 0;margin:0 -8px;z-index:1;rotate:-2deg}
+.intro-ribbon .mqt{display:block;overflow:hidden;white-space:nowrap;background:var(--blue);border-block:1px solid var(--ink);padding:6px 10px;font:400 11px/1.5 "Martian Mono",monospace}
+.mobile-invite .ribbon-wrap{position:relative;aspect-ratio:1440/546;background:linear-gradient(var(--blue) 0 45%,var(--paper) 45%)}
+.ribbon-wrap .ribbon-shape{position:absolute;inset:0;width:100%}
+.ribbon-wrap .ribbon-text{position:absolute;left:1.458%;top:4.128%;width:98.542%}
 .mobile-invite .blue{background:var(--blue)}
 .mobile-invite .blue h2{color:var(--ink)}
 .mobile-invite .portrait{width:64%;max-width:270px;max-height:340px;object-fit:contain;margin:0 auto 24px;rotate:-3deg}
-.mobile-invite .garage{margin:22px 0 0;border-bottom:2px solid var(--ink)}
+.event-title img:first-of-type{width:min(75%,300px);margin-bottom:8px}
+.event-title img:last-of-type{width:min(100%,440px)}
+.event-caption{display:flex;align-items:center;gap:8px 16px;flex-wrap:wrap}
+.event-caption img{width:116px}
+.mobile-invite .garage-scene{margin:22px 0 0;position:relative;container-type:inline-size;border-bottom:2px solid var(--ink)}
+.garage-scene .gar{--u:calc(100cqw / 1200)}
 .mobile-invite .program{color:#fff;background:#343328 linear-gradient(#161616a0,#16161668)}
 .mobile-invite .program::before,.mobile-invite .wish-section::before{
   content:"";position:absolute;inset:0;background:linear-gradient(#16161688,#16161670),var(--section-photo) center/cover;pointer-events:none
@@ -58,7 +67,9 @@
 .mobile-invite .program-list li:nth-child(5){background:#e6e6e6}
 .mobile-invite .program-list li:nth-child(6){background:#efadc7}
 .mobile-invite .program-list .k{display:block;margin-bottom:6px}
-.mobile-invite .program-list img{width:62px;max-height:64px;object-fit:contain;float:right;margin:0 0 8px 10px}
+.mobile-invite .program-list .card-art{width:62px;max-height:64px;object-fit:contain;float:right;margin:0 0 8px 10px}
+.mobile-invite .card-title img{width:auto;max-width:100%;height:auto}
+.mobile-invite .program-list .card-title{display:flow-root}
 .mobile-invite .dress{background:#5062c9;color:white}
 .mobile-invite .sequin{width:62%;max-width:260px;margin:4px auto 20px;rotate:-7deg}
 .mobile-invite .letter{border:1px solid var(--ink);padding:20px;background:#f0efeb;margin:18px 0 30px;box-shadow:5px 6px 0 #16161622}
@@ -83,4 +94,8 @@
 @media (min-width:480px){
   .mobile-invite .program-list,.mobile-invite .checklists{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
-@media (prefers-reduced-motion:reduce){.hero-art .disco{animation:none}}
+@media (prefers-reduced-motion:reduce){
+  .hero-art .disco,.garage-scene .gar.on :is(.gw,.gh,.gp i){animation:none}
+  .garage-scene .gar.on .gw{opacity:0}
+  .garage-scene .gar :is(.gw,.gh,.gb,.gp i){transition:none}
+}
