@@ -160,6 +160,8 @@ a.o.bt:active,button.o.bt:active{scale:.95;translate:0 0;rotate:0deg}
 button.o.bt[aria-busy=true]{opacity:.6;pointer-events:none}
 </style>
 <link rel="stylesheet" href="mobile.css?v=garage-lights">
+<link rel="stylesheet" href="easter-eggs.css">
+<script defer src="easter-eggs.js"></script>
 <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
@@ -199,6 +201,14 @@ button.o.bt[aria-busy=true]{opacity:.6;pointer-events:none}
   <span class="anchor" id="wishlist" style="--y:8114"></span>
   <span class="anchor" id="rsvp" style="--y:8963"></span>
   <div class="mq" style="--x:-80;--y:800;--w:1600;--h:64;--r:2deg;--fs:20" aria-hidden="true"><span class="mqt"></span></div>
+  <button class="o egg" type="button" data-egg="music-ball" aria-label="Покрутить диско-шар" style="--x:1210;--y:42;--w:218;--h:210"></button>
+  <button class="o egg" type="button" data-egg="microphone" aria-label="Включить микрофон" style="--x:625;--y:530;--w:166;--h:220"></button>
+  <button class="o egg" type="button" data-egg="candles" aria-label="Свечи на торте" aria-pressed="false" style="--x:1120;--y:555;--w:210;--h:235">
+    <span class="flames" aria-hidden="true"><i></i><i></i><i></i></span>
+  </button>
+  <button class="o egg" type="button" data-egg="stamp" aria-label="Поставить штемпель на открытку" style="--x:1090;--y:6100;--w:184;--h:184">
+    <span class="stamp-mark" aria-hidden="true">Доставлено лично · 07.12</span>
+  </button>
   <a class="o" href="https://t.me/maru_stepanova" style="--x:768;--y:6512;--w:254;--h:40">Telegram @maru_stepanova</a>
   <a class="o" data-b="8:469" href="#rsvp" style="--x:770;--y:6603;--w:159;--h:58">увидимся?</a>
   <a class="o maps" data-b="8:471" href="#" style="--x:943;--y:6603;--w:195;--h:62">как добраться</a>
@@ -249,11 +259,16 @@ button.o.bt[aria-busy=true]{opacity:.6;pointer-events:none}
     <p class="k">01 ✱ привет</p>
     <h2 id="m-intro-title" class="sr">Приглашаю на день рождения</h2>
     <img class="hero-title" src="img/mobile-v2/title.webp" width="650" height="216" alt="">
-    <div class="hero-art" aria-hidden="true">
+    <div class="hero-art">
       <img class="child" src="img/mobile-v2/child.webp" width="597" height="650" alt="" fetchpriority="high">
       <img class="mic" src="img/mobile-v2/mic.webp" width="246" height="333" alt="">
       <img class="disco" src="img/x-5_62.webp" alt="">
       <img class="confetti" src="img/x-72_218.webp" alt="">
+      <button class="egg" type="button" data-egg="music-ball" aria-label="Покрутить диско-шар"></button>
+      <button class="egg" type="button" data-egg="microphone" aria-label="Включить микрофон"></button>
+      <button class="egg" type="button" data-egg="candles" aria-label="Свечи на торте" aria-pressed="false">
+        <span class="flames" aria-hidden="true"><i></i><i></i><i></i></span>
+      </button>
     </div>
     <p>Привет! Раз ты здесь, значит, мы с тобой уже знакомы. Но на всякий случай: я Маша, и я зову тебя на свой день рождения!</p>
     <p>В этом году мне хочется отметить его немного необычно: собрать в одном месте людей из разных частей моей жизни, познакомить вас друг с другом, поиграть и вдоволь наговориться.</p>
@@ -313,6 +328,9 @@ button.o.bt[aria-busy=true]{opacity:.6;pointer-events:none}
     <h2>Маленькое письмо тебе</h2>
     <div class="letter">
       <img class="postmark" src="img/mobile-v2/postmark.webp" width="100" height="100" alt="" loading="lazy">
+      <button class="egg" type="button" data-egg="stamp" aria-label="Поставить штемпель на открытку">
+        <span class="stamp-mark" aria-hidden="true">Доставлено лично · 07.12</span>
+      </button>
       <p>Привет!</p>
       <p>Очень хочу провести свой день рождения в компании людей, которые мне дороги. И если ты читаешь это приглашение, значит, ты один из этих людей.</p>
       <p>Буду очень рада тебя видеть!</p>
@@ -379,6 +397,15 @@ button.o.bt[aria-busy=true]{opacity:.6;pointer-events:none}
 </main>
 
 <a class="up" href="#top" aria-label="Наверх">наверх<br>↑</a>
+<audio id="garage-track" src="audio/garage-loop.mp3" preload="none" loop></audio>
+<button class="music-toggle" type="button" aria-pressed="false" hidden>
+  <span class="music-icon" aria-hidden="true">♪</span><span class="music-label">Включить музыку</span>
+</button>
+<div class="egg-toast" hidden>
+  <span class="egg-message" role="status"></span>
+  <a class="egg-song" href="#m-song" hidden>Предложить песню</a>
+  <button type="button" aria-label="Закрыть подсказку">×</button>
+</div>
 
 <dialog class="dlg" aria-labelledby="dlgT" aria-describedby="dlgP">
   <div class="card">
@@ -579,8 +606,23 @@ button.o.bt[aria-busy=true]{opacity:.6;pointer-events:none}
         const pi = new Image(); pi.src = w.p; pi.alt = ''; pp.appendChild(pi);
         const fx = [['amb', 'pk', 'sp'], ['gr', 'sp'], ['vi', 'pk', 'amb', 'sp']][i] || [];
         fx.forEach((c, j) => { const e = document.createElement('i'); e.className = c; e.style.setProperty('--dl', (t0 * .5 + i * 0.35 + .5 + j * .25).toFixed(2) + 's'); pp.appendChild(e); });
+        const guests = document.createElement('span');
+        guests.className = 'garage-guests';
+        const placements = i === 1 ? [[30,42,57]] : [[18,20,65],[43,18,57],[69,17,68]];
+        placements.forEach(([x, width, height], index) => {
+          const guest = document.createElement('span');
+          guest.className = 'garage-guest';
+          guest.style.cssText = `--guest-x:${x}%;--guest-w:${width}%;--guest-h:${height}%;--guest-delay:${-index * .47}s`;
+          guests.appendChild(guest);
+        });
+        pp.appendChild(guests);
         gar.appendChild(pp); gar.appendChild(d);
       });
+      const note = document.createElement('span');
+      note.className = 'garage-note';
+      note.textContent = 'Свои уже здесь';
+      note.style.setProperty('--y', Math.min(...G.w.map(w => w.y)) - 108);
+      gar.appendChild(note);
       scene.appendChild(gar);
       new IntersectionObserver(es => es.forEach(e => {
         if (e.isIntersecting) { gar.classList.remove('off'); gar.classList.add('on'); }

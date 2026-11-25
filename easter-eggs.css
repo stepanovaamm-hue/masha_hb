@@ -1,0 +1,69 @@
+.egg{
+  position:absolute;z-index:5;display:block;min-width:44px;min-height:44px;
+  border:0;background:transparent;color:var(--ink);padding:0;cursor:pointer;border-radius:18px
+}
+.egg:focus-visible,.music-toggle:focus-visible,.egg-toast button:focus-visible{
+  outline:3px solid #5062c9;outline-offset:3px
+}
+@media (hover:hover){.egg:hover{background:#fff2}}
+.egg.effect{animation:egg-bump .65s ease-out}
+.hero-art:has(.egg.effect) .disco,#desk:has(.egg.effect) img[src$="x-5_62.webp"]{
+  animation:disco-turn .85s ease-in-out both
+}
+@keyframes egg-bump{35%{transform:scale(1.08);filter:drop-shadow(0 0 19px #fff)}}
+@keyframes disco-turn{from{rotate:0deg}to{rotate:360deg}}
+.hero-art .egg[data-egg="music-ball"]{right:2%;top:-2%;width:23%;height:30%}
+.hero-art .egg[data-egg="microphone"]{left:4%;bottom:0;width:25%;height:41%}
+.hero-art .egg[data-egg="candles"]{right:8%;bottom:6%;width:26%;height:29%}
+.hero-art .egg{z-index:5}
+.flames{display:flex;align-items:flex-end;justify-content:center;gap:8%;height:40%;opacity:0;position:absolute;inset:0 0 auto}
+.flames i{width:8px;height:15px;border-radius:55% 55% 48% 48%;background:#fff0a1;box-shadow:0 0 12px 3px #fdbf67;transform-origin:bottom;animation:flame-dance .55s ease-in-out infinite alternate}
+.flames i:nth-child(2){height:19px;animation-delay:-.3s}
+@keyframes flame-dance{from{rotate:-8deg;scale:1 .85}to{rotate:8deg;scale:.82 1.12}}
+.egg[data-egg="candles"][aria-pressed="true"] .flames{opacity:1}
+.mobile-invite .letter{position:relative}
+.letter .egg[data-egg="stamp"]{right:15px;top:15px;width:82px;height:82px}
+.stamp-mark{position:absolute;z-index:1;top:58%;right:0;white-space:nowrap;pointer-events:none;
+  border:2px solid currentColor;border-radius:50%;padding:8px 10px;color:#a62557;background:#f0efebdb;
+  font:400 10px/1.3 "Martian Mono",monospace;text-transform:uppercase;rotate:-13deg;
+  opacity:0;scale:1.2;transition:opacity .18s,scale .18s
+}
+.egg[data-stamped] .stamp-mark{opacity:1;scale:1}
+.ball-glints{position:absolute;inset:0;pointer-events:none}
+.ball-glints i{position:absolute;left:50%;top:50%;width:15px;height:15px;border-radius:50%;background:#fff8cf;box-shadow:0 0 13px 5px #ffe8b6;animation:ball-light .85s ease-out both}
+@keyframes ball-light{from{opacity:.9;transform:translate(-50%,-50%) scale(.35)}to{opacity:0;transform:translate(var(--glint-x),var(--glint-y)) scale(1.4)}}
+.music-toggle{
+  position:fixed;z-index:31;left:max(12px,env(safe-area-inset-left));bottom:max(12px,env(safe-area-inset-bottom));
+  display:inline-flex;align-items:center;gap:8px;min-height:44px;
+  background:var(--paper);color:var(--ink);border:1.5px solid var(--ink);border-radius:999px;
+  padding:8px 13px;font:500 13px/1.2 Onest,sans-serif;box-shadow:2px 2px 0 var(--ink);cursor:pointer
+}
+.music-toggle[aria-pressed="true"]{background:var(--pink)}
+.music-toggle .music-icon{font-size:17px}
+.egg-toast{
+  position:fixed;z-index:36;left:max(12px,env(safe-area-inset-left));bottom:calc(max(12px,env(safe-area-inset-bottom)) + 54px);
+  max-width:min(320px,calc(100vw - 24px));background:var(--yellow);color:var(--ink);
+  border:1.5px solid var(--ink);border-radius:14px;padding:11px 36px 11px 13px;
+  box-shadow:2px 3px 0 #161616;font:500 15px/1.4 Onest,sans-serif
+}
+.egg-toast button{position:absolute;top:0;right:0;min-width:34px;min-height:34px;border:0;background:transparent;cursor:pointer;font:500 20px Onest}
+.egg-toast a{display:block;color:inherit;text-underline-offset:3px}
+.garage-guests{position:absolute;inset:0;z-index:1;opacity:0;transition:opacity .45s 1.45s;filter:drop-shadow(0 1px 1px #15172266)}
+.gar.on .garage-guests{opacity:.88}
+.garage-guest{position:absolute;bottom:-1%;left:var(--guest-x);width:var(--guest-w,16%);height:var(--guest-h,65%);transform-origin:bottom center}
+.garage-guest::before,.garage-guest::after{content:"";position:absolute;background:#151722}
+.garage-guest::before{width:37%;height:30%;left:32%;top:0;border-radius:55% 48% 46% 42%}
+.garage-guest::after{inset:26% 4% -5%;border-radius:39% 43% 0 0;clip-path:polygon(13% 9%,42% 0,61% 0,83% 8%,98% 34%,84% 48%,76% 35%,78% 100%,20% 100%,23% 35%,0 66%,0 46%)}
+.gar.on .garage-guest{animation:guest-sway 3.8s ease-in-out var(--guest-delay,0s) infinite alternate}
+@keyframes guest-sway{from{rotate:-4deg}to{rotate:4deg}}
+.garage-note{position:absolute;left:50%;top:calc(var(--y)*var(--u));translate:-50% -50%;
+  padding:4px 8px;border:1px solid var(--ink);background:var(--paper);color:var(--ink);border-radius:10px;
+  opacity:0;white-space:nowrap;font:500 clamp(9px,calc(24*var(--u)),18px)/1.2 Onest,sans-serif
+}
+.gar.on .garage-note{animation:garage-note 4s 1.25s both}
+@keyframes garage-note{0%,100%{opacity:0}12%,83%{opacity:1}}
+@media (prefers-reduced-motion:reduce){
+  .egg.effect,.flames i,.gar.on .garage-guest,.gar.on .garage-note,.ball-glints i{animation:none}
+  .garage-guests,.stamp-mark{transition:none}
+  .gar.on .garage-note{opacity:1}
+}
