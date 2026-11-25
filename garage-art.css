@@ -8,6 +8,8 @@
 }
 .garage-art__picture{position:relative;aspect-ratio:2;line-height:0}
 .garage-art__picture :is(img,svg){display:block;width:100%;height:auto}
+.garage-art__picture>svg{position:absolute;inset:0}
+.garage-art:not(.has-silhouettes) .garage-art__guests{visibility:hidden}
 .garage-art__arrival{
   position:absolute;left:50%;top:11%;translate:-50% 0;
   background:#f1e9d6;color:#292729;padding:4px 9px;border-radius:999px;

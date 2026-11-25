@@ -11,9 +11,9 @@
 }
 @keyframes glass-sway{0%,100%{rotate:-3.5deg}50%{rotate:4.5deg}}
 .mobile-invite .together .toast-stage{
-  margin:12px -16px calc(-1 * clamp(34px,9vw,54px));aspect-ratio:1.8
+  margin-top:12px;aspect-ratio:1.8
 }
-.mobile-invite .together .toast-glass{left:14%;width:43%}
+.mobile-invite .together .toast-glass{left:14%;width:43%;bottom:-8%;transform-origin:24% 108%}
 .paper-confetti{position:absolute;inset:0;pointer-events:none}
 .paper-confetti img{
   position:absolute;left:var(--x);top:var(--y);width:var(--s);height:var(--s);

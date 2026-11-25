@@ -135,12 +135,12 @@ a.o.route-link:hover{background:var(--blue)}
 .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
 button.o.bt[aria-busy=true]{opacity:.6;pointer-events:none}
 </style>
-<link rel="stylesheet" href="mobile.css?v=garage-lights">
+<link rel="stylesheet" href="mobile.css?v=portrait-layout">
 <link rel="stylesheet" href="easter-eggs.css?v=portrait-wink">
-<link rel="stylesheet" href="collage.css">
-<link rel="stylesheet" href="garage-art.css">
+<link rel="stylesheet" href="collage.css?v=full-bleed">
+<link rel="stylesheet" href="garage-art.css?v=silhouettes">
 <script defer src="easter-eggs.js?v=portrait-wink"></script>
-<script defer src="garage-art.js"></script>
+<script defer src="garage-art.js?v=silhouettes"></script>
 <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
@@ -267,11 +267,11 @@ button.o.bt[aria-busy=true]{opacity:.6;pointer-events:none}
       <img src="img/mobile-v2/about-1.webp" width="505" height="116" alt="" loading="lazy">
       <img src="img/mobile-v2/about-2.webp" width="445" height="102" alt="" loading="lazy">
     </h2>
-    <img class="portrait" src="img/mobile-v2/portrait.webp" width="356" height="650" alt="Маша" loading="lazy">
     <p>Мне очень нравится, что в моей жизни есть такие разные люди.</p>
     <p>С кем-то мы знакомы уже много лет, с кем-то встретились благодаря работе, общим увлечениям или совершенно случайным обстоятельствам.</p>
     <p>С кем-то из вас я вижусь почти каждый день, а с кем-то мы уже давно собираемся встретиться.</p>
     <p>И мне давно хочется оказаться со всеми вами в одном пространстве. Кажется, день рождения — отличный для этого повод.</p>
+    <img class="portrait" src="img/mobile-v2/portrait.webp" width="356" height="650" alt="Маша" loading="lazy">
   </section>
   <div class="ribbon-wrap" aria-hidden="true">
     <img class="ribbon-shape" src="img/mobile-v2/ribbon.webp" width="1400" height="532" alt="">
@@ -313,16 +313,30 @@ button.o.bt[aria-busy=true]{opacity:.6;pointer-events:none}
   </section>
   <section id="m-when">
     <p class="k">06 ✱ когда и где</p>
-    <h2>Маленькое письмо тебе</h2>
+    <h2 class="letter-title"><span class="sr">Маленькое письмо тебе</span>
+      <img src="img/mobile-v2/letter-h1.webp" width="221" height="37" alt="">
+      <span aria-hidden="true">
+        <img src="img/mobile-v2/letter-h2.webp" width="144" height="22" alt="">
+        <img src="img/mobile-v2/letter-h3.webp" width="95" height="26" alt="">
+      </span>
+    </h2>
     <div class="letter">
       <img class="postmark" src="img/mobile-v2/postmark.webp" width="100" height="100" alt="" loading="lazy">
       <button class="egg" type="button" data-egg="stamp" aria-label="Поставить штемпель на открытку">
         <span class="stamp-mark" aria-hidden="true">Доставлено лично · 07.12</span>
       </button>
-      <p>Привет!</p>
-      <p>Очень хочу провести свой день рождения в компании людей, которые мне дороги. И если ты читаешь это приглашение, значит, ты один из этих людей.</p>
-      <p>Буду очень рада тебя видеть!</p>
-      <p>Обнимаю,<br>Маша ♡</p>
+      <div class="letter-handwritten">
+        <div class="sr">
+          <p>Привет!</p>
+          <p>Очень хочу провести свой день рождения в компании людей, которые мне дороги. И если ты читаешь это приглашение, значит, ты один из этих людей.</p>
+          <p>Буду очень рада тебя видеть! Обнимаю, Маша ♡</p>
+        </div>
+        <img src="img/mobile-v2/letter.webp" width="456" height="321" alt="" loading="lazy">
+        <div class="letter-signature">
+          <img src="img/mobile-v2/letter-sign.webp" width="124" height="34" alt="">
+          <img src="img/mobile-v2/letter-masha.webp" width="110" height="41" alt="">
+        </div>
+      </div>
       <hr>
       <h3 class="card-title"><span class="sr">Гаражная вечеринка</span><img src="img/mobile-v2/posttitle.webp" width="342" height="26" alt=""></h3>
       <p>7 декабря 2026, понедельник<br>с 18:00 до 22:30<br>Garage du funk, Советская ул., 51А/2</p>
@@ -335,9 +349,11 @@ button.o.bt[aria-busy=true]{opacity:.6;pointer-events:none}
     </div>
   </section>
   <section class="blue together">
-    <h2 class="art-title"><span class="sr">Как же хорошо, что мы когда-то познакомились!</span><img src="img/mobile-v2/together-title.webp" width="607" height="98" alt="" loading="lazy"></h2>
-    <p>А теперь есть ещё один повод собраться вместе.</p>
-    <a class="mbtn" href="#m-rsvp">увидимся?</a>
+    <div class="together-copy">
+      <h2 class="art-title"><span class="sr">Как же хорошо, что мы когда-то познакомились!</span><img src="img/mobile-v2/together-title.webp" width="607" height="98" alt="" loading="lazy"></h2>
+      <p>А теперь есть ещё один повод собраться вместе.</p>
+      <a class="mbtn" href="#m-rsvp">увидимся?</a>
+    </div>
     <div class="toast-stage" aria-hidden="true">
       <div class="paper-confetti"></div>
       <img class="toast-glass" src="img/toast-cutout.webp" width="437" height="500" alt="" loading="lazy">
@@ -499,8 +515,8 @@ button.o.bt[aria-busy=true]{opacity:.6;pointer-events:none}
     for (let i = 0; i < (mobile ? 19 : 42); i += 1) {
       const piece = new Image();
       const edge = i % 4;
-      const x = edge === 0 ? rnd()*26 : edge === 1 ? 74+rnd()*26 : rnd()*100;
-      const y = edge === 2 ? 76+rnd()*24 : edge === 3 ? rnd()*24 : rnd()*100;
+      const x = edge === 0 ? 6+rnd()*20 : edge === 1 ? 74+rnd()*20 : 6+rnd()*88;
+      const y = edge === 2 ? 76+rnd()*16 : edge === 3 ? 8+rnd()*16 : 8+rnd()*84;
       piece.alt = '';
       piece.loading = 'lazy';
       piece.src = paperAsset(rnd());

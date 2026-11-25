@@ -13,7 +13,8 @@
 .event-ticket{padding:10px 16px;background:var(--yellow)}
 .mobile-invite{position:relative;display:none;overflow:hidden;background:var(--paper);color:var(--ink)}
 @media (max-width:1100px){.mobile-invite{display:block}}
-.mobile-invite section,.mobile-invite footer{position:relative;padding:clamp(34px,9vw,54px) clamp(18px,6vw,34px);scroll-margin-top:70px}
+.mobile-invite{--section-gutter:clamp(18px,6vw,34px)}
+.mobile-invite section,.mobile-invite footer{position:relative;padding:clamp(34px,9vw,54px) var(--section-gutter);scroll-margin-top:70px}
 .mobile-invite p{margin:0 0 1em}
 .mobile-invite p:last-child{margin-bottom:0}
 .mobile-invite h2,.mobile-invite h3{font-family:Onest,sans-serif;line-height:1.03;margin:0 0 .55em;text-wrap:balance}
@@ -36,18 +37,19 @@
 .mobile-invite .hero-art{isolation:isolate;position:relative;aspect-ratio:1.13;margin:0 -14px 22px}
 .hero-art::before{content:"";position:absolute;z-index:-1;inset:1% 1% 12% 19%;background:var(--blue);clip-path:polygon(49% 0,55% 36%,78% 12%,69% 40%,100% 31%,75% 49%,97% 70%,68% 63%,73% 100%,53% 75%,36% 97%,35% 71%,1% 78%,25% 53%,1% 40%,36% 40%,26% 6%,45% 32%)}
 .hero-art img{position:absolute}
-.hero-art .child{width:73%;right:7%;bottom:0;height:94%;object-fit:contain;object-position:bottom}
+.hero-art .child{width:73%;right:7%;bottom:0;height:94%;object-fit:contain;object-position:bottom;mask-image:linear-gradient(#000 94%,transparent)}
 .hero-art .disco{width:23%;right:2%;top:-2%;transform-origin:50% 0;animation:swing 4s ease-in-out infinite alternate}
 .hero-art .mic{width:27%;left:4%;bottom:0}
 .hero-art .confetti{width:14%;left:6%;top:8%;rotate:18deg}
 .mobile-invite .intro-ribbon{position:relative;background:var(--pink);padding:7px 0;margin:0 -8px;z-index:1;rotate:-2deg}
 .intro-ribbon .mqt{display:block;overflow:hidden;white-space:nowrap;background:var(--blue);border-block:1px solid var(--ink);padding:6px 10px;font:400 11px/1.5 "Martian Mono",monospace}
 .mobile-invite .ribbon-wrap{position:relative;aspect-ratio:1440/546;background:linear-gradient(var(--blue) 0 45%,var(--paper) 45%)}
-.ribbon-wrap .ribbon-shape{position:absolute;inset:0;width:100%}
-.ribbon-wrap .ribbon-text{position:absolute;left:1.458%;top:4.128%;width:98.542%}
+.ribbon-wrap .ribbon-shape{position:absolute;inset:0;width:100%;z-index:2}
+.ribbon-wrap .ribbon-text{position:absolute;left:1.458%;top:4.128%;width:98.542%;z-index:2}
 .mobile-invite .blue{background:var(--blue)}
 .mobile-invite .blue h2{color:var(--ink)}
-.mobile-invite .portrait{width:64%;max-width:270px;max-height:340px;object-fit:contain;margin:0 auto 24px;rotate:-3deg}
+.mobile-invite #m-about{padding-bottom:0}
+.mobile-invite .portrait{position:relative;z-index:1;width:68%;max-width:270px;max-height:340px;object-fit:contain;margin:10px auto calc(-1 * clamp(34px,10vw,55px));rotate:-3deg}
 .event-title img:first-of-type{width:min(75%,300px);margin-bottom:8px}
 .event-title img:last-of-type{width:min(100%,440px)}
 .event-caption{display:flex;align-items:center;gap:8px 16px;flex-wrap:wrap}
@@ -71,12 +73,21 @@
 .mobile-invite .dress{background:#5062c9;color:white}
 .mobile-invite .sequin{width:62%;max-width:260px;margin:4px auto 20px;rotate:-7deg}
 .mobile-invite .letter{border:1px solid var(--ink);padding:20px;background:#f0efeb;margin:18px 0 30px;box-shadow:5px 6px 0 #16161622}
+.mobile-invite .letter-title{display:grid;justify-items:center;gap:3px;margin-bottom:16px}
+.letter-title>img{width:min(100%,221px)}
+.letter-title>span:not(.sr){display:flex;gap:8px;width:min(90%,239px);align-items:center}
+.letter-title>span:not(.sr) img:first-child{width:59%}
+.letter-title>span:not(.sr) img:last-child{width:37%}
+.letter-handwritten>img{width:100%}
+.letter-signature{display:grid;justify-content:end;justify-items:end;gap:1px;margin:8px 0}
+.letter-signature img{max-width:116px}
 .mobile-invite .letter .postmark{width:72px;float:right;margin:0 0 10px 12px;rotate:7deg}
 .mobile-invite .letter hr{border:0;border-top:1px dashed #686761;margin:18px 0}
 .mobile-invite .letter ul,.mobile-invite .checklists ul{padding-left:1.25em}
 .mobile-invite .checklists{display:grid;gap:20px}
 .mobile-invite .checklists ul{margin:0}
-.mobile-invite .together{text-align:center;padding-bottom:46px}
+.mobile-invite .together{text-align:center;padding-inline:0;padding-bottom:0}
+.mobile-invite .together-copy{padding-inline:var(--section-gutter)}
 .mobile-invite .together h2{font-size:clamp(30px,8vw,44px)}
 .mobile-invite .wish-section{--section-photo:url("img/mobile-v2/wishlist.webp");background:#282722;color:#fff}
 .mobile-invite .wish-section::before{background:linear-gradient(#161616d9,#161616aa),var(--section-photo) center/cover}

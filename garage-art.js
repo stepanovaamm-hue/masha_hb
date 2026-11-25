@@ -22,7 +22,7 @@
     [1608,236],[1635,258],[1680,277],
   ];
 
-  function garageSvg(id, facade, guests, standalone = false) {
+  function garageSvg(id, facade, silhouettes, standalone = false) {
     const label = (key, name) => `id="${id}-${key}" inkscape:groupmode="layer" inkscape:label="${name}"`;
     const windowsPolygon = windows.map(points => `<polygon points="${points}"/>`).join('');
     const bulbShades = bulbs.map(([x,y]) => `<circle cx="${x}" cy="${y}" r="5.4" fill="#5b5042"/>`).join('');
@@ -30,7 +30,11 @@
     return `<svg xmlns="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" viewBox="0 0 1774 887" width="1774" height="887" role="img" aria-label="Гараж с мятной дверью, светом в окнах и гирляндой">
       <defs>
         <clipPath id="${id}-windows">${windowsPolygon}</clipPath>
-        <clipPath id="${id}-right-guest"><rect x="1356" y="500" width="130" height="164"/></clipPath>
+        <filter id="${id}-ink" color-interpolation-filters="sRGB">
+          <feColorMatrix type="matrix" values="0 0 0 0 .14  0 0 0 0 .09  0 0 0 0 .10  -.2126 -.7152 -.0722 0 1"/>
+          <feComponentTransfer><feFuncA type="linear" slope="1.12" intercept="-.12"/></feComponentTransfer>
+          <feComposite operator="in" in2="SourceGraphic"/>
+        </filter>
         <radialGradient id="${id}-glow">
           <stop stop-color="#ffe592" stop-opacity=".55"/>
           <stop offset="1" stop-color="#ffd470" stop-opacity="0"/>
@@ -41,17 +45,17 @@
           <stop offset=".53" stop-color="#ffedc8" stop-opacity="0"/>
         </linearGradient>
       </defs>
-      <g ${label('facade','01 · Фасад и интерьер')}>
+      ${standalone ? `<g ${label('facade','01 · Фасад и интерьер')}>
         <image href="${facade}" width="1774" height="887"/>
-      </g>
+      </g>` : ''}
       <g ${label('window-dim','02 · Затемнение окон')} class="garage-art__off" ${standalone ? 'style="display:none"' : ''}>
         <rect width="1774" height="887" fill="#162637" opacity=".81" clip-path="url(#${id}-windows)"/>
       </g>
-      <g ${label('guests','03 · Гости за стеклом')} class="garage-art__on" clip-path="url(#${id}-windows)">
-        <image href="${guests}" x="352" y="487" width="358" height="181" opacity=".9"/>
-        <g clip-path="url(#${id}-right-guest)">
-          <image href="${guests}" x="1232" y="520" width="224" height="112" opacity=".84" transform="translate(2700 0) scale(-1 1)"/>
-        </g>
+      <g ${label('guests','03 · Гости за стеклом')} class="garage-art__on garage-art__guests" clip-path="url(#${id}-windows)" opacity=".89">
+        <image href="${silhouettes[0]}" x="317" y="511" width="202" height="229" filter="url(#${id}-ink)"/>
+        <image href="${silhouettes[1]}" x="518" y="421" width="205" height="333" filter="url(#${id}-ink)"/>
+        <image href="${silhouettes[2]}" x="1233" y="489" width="214" height="214" filter="url(#${id}-ink)"/>
+        <image href="${silhouettes[3]}" x="1453" y="475" width="175" height="175" filter="url(#${id}-ink)"/>
       </g>
       <g ${label('glass','04 · Отражения')} class="garage-art__on" clip-path="url(#${id}-windows)">
         <rect x="160" y="347" width="580" height="410" fill="url(#${id}-reflection)"/>
@@ -67,12 +71,20 @@
     return;
   }
 
+  const silhouettes = [1,2,3,4].map(index => `img/garage-silhouette-${index}.webp`);
+  const silhouetteImages = silhouettes.map(src => {
+    const img = new Image();
+    img.src = src;
+    return img.decode();
+  });
+  const guestsReady = Promise.allSettled(silhouetteImages).then(images => images.every(image => image.status === 'fulfilled'));
   for (const scene of document.querySelectorAll('.garage-art')) {
     const button = scene.querySelector('button');
     let chosen = false;
     let lit = false;
     const picture = scene.querySelector('.garage-art__picture');
-    picture.innerHTML = garageSvg(scene.id, 'img/garage-print.webp', 'img/garage-print-guests.webp');
+    picture.insertAdjacentHTML('beforeend', garageSvg(scene.id, '', silhouettes));
+    guestsReady.then(ready => { if (ready) scene.classList.add('has-silhouettes'); });
     const arrival = document.createElement('span');
     arrival.className = 'garage-art__arrival';
     arrival.textContent = 'Свои уже здесь';
