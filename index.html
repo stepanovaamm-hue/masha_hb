@@ -206,6 +206,10 @@ button.o.bt[aria-busy=true]{opacity:.6;pointer-events:none}
         </div>
       </fieldset>
       <div class="rsvp-field">
+        <label for="d-companion">Буду вместе с</label>
+        <input class="inp" id="d-companion" name="companion" maxlength="120" placeholder="Имя спутника (необязательно)">
+      </div>
+      <div class="rsvp-field">
         <label for="d-song">Какую песню включить для тебя?</label>
         <p id="d-song-note" class="rsvp-note">Необязательно · ту самую, которой невозможно не подпевать</p>
         <input class="inp" id="d-song" name="song" maxlength="200" aria-describedby="d-song-note" placeholder="Исполнитель — песня">
@@ -404,6 +408,10 @@ button.o.bt[aria-busy=true]{opacity:.6;pointer-events:none}
         <label class="chip"><input type="radio" name="attend" value="no">В этот раз не получится&nbsp;:(</label>
       </div>
     </fieldset>
+    <div class="rsvp-field">
+      <label for="m-companion">Буду вместе с</label>
+      <input class="inp" id="m-companion" name="companion" maxlength="120" placeholder="Имя спутника (необязательно)">
+    </div>
     <div class="rsvp-field">
       <label for="m-song">Какую песню включить для тебя?</label>
       <p id="m-song-note" class="rsvp-note">Необязательно · ту самую, которой невозможно не подпевать</p>
@@ -743,6 +751,7 @@ button.o.bt[aria-busy=true]{opacity:.6;pointer-events:none}
   for (const f of document.querySelectorAll('.rsvp')) {
     const btn = f.querySelector('[type=submit]');
     const nameField = f.elements.namedItem('name');
+    const companionField = f.elements.namedItem('companion');
     const songField = f.elements.namedItem('song');
     const error = f.querySelector('.rsvp-error');
     nameField.addEventListener('input', () => {
@@ -753,6 +762,7 @@ button.o.bt[aria-busy=true]{opacity:.6;pointer-events:none}
       e.preventDefault();
       if (btn.disabled || dlg.open) return;
       const name = nameField.value.trim(), song = songField.value.trim();
+      const companion = companionField.value.trim();
       const attend = f.elements.namedItem('attend').value;
       if (!name) {
         nameField.setAttribute('aria-invalid', 'true');
@@ -762,13 +772,17 @@ button.o.bt[aria-busy=true]{opacity:.6;pointer-events:none}
       }
       btn.disabled = true;
       btn.textContent = 'отправляем…';
-      const ok = f.website.value ? true : await save({ name: name.slice(0, 80), attend, song: song ? song.slice(0, 200) : null });
+      const ok = f.website.value ? true : await save({
+        name: name.slice(0, 80), attend,
+        companion: companion.slice(0, 120) || null,
+        song: song ? song.slice(0, 200) : null,
+      });
       btn.textContent = 'отправить ответ';
       document.getElementById('dlgK').textContent = ok ? 'ответ отправлен' : 'ответ не отправился';
       document.getElementById('dlgT').textContent = ok ? MSG[attend][1] : 'ой, что-то пошло не так';
       document.getElementById('dlgP').textContent = ok ? 'Ответ уже у меня. Передумаешь — просто отправь форму ещё раз.' : 'Проверь интернет и нажми «отправить ответ» ещё раз — всё, что ты написал(а), осталось в форме.';
       card.className = 'card ' + (ok ? attend : 'no');
-      if (ok) { nameField.value = ''; songField.value = ''; }
+      if (ok) { nameField.value = ''; companionField.value = ''; songField.value = ''; }
       const sb = btn.getBoundingClientRect();
       if (ok && attend !== 'no') burst(sb.left + sb.width / 2, sb.top + sb.height / 2);
       setTimeout(() => {

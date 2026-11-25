@@ -11,6 +11,9 @@ create table if not exists public.rsvp (
   song       text check (song is null or char_length(song) <= 200)
 );
 
+alter table public.rsvp
+  add column if not exists companion text check (char_length(companion) <= 120);
+
 -- сайт может только добавлять ответы, читать их — нет
 alter table public.rsvp enable row level security;
 drop policy if exists "guests can answer" on public.rsvp;
@@ -47,6 +50,7 @@ begin
       'text', '🎉 Ответ на квартирник' || chr(10) ||
               'Кто: ' || new.name || chr(10) ||
               verdict ||
+              coalesce(chr(10) || 'Буду вместе с: ' || nullif(btrim(new.companion), ''), '') ||
               coalesce(chr(10) || '🎵 Песня: ' || new.song, '')
     )
   );
