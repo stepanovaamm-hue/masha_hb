@@ -16,11 +16,14 @@
 .hero-art .egg[data-egg="microphone"]{left:4%;bottom:0;width:25%;height:41%}
 .hero-art .egg[data-egg="candles"]{right:8%;bottom:6%;width:26%;height:29%}
 .hero-art .egg{z-index:5}
-.flames{display:flex;align-items:flex-end;justify-content:center;gap:8%;height:40%;opacity:0;position:absolute;inset:0 0 auto}
-.flames i{width:8px;height:15px;border-radius:55% 55% 48% 48%;background:#fff0a1;box-shadow:0 0 12px 3px #fdbf67;transform-origin:bottom;animation:flame-dance .55s ease-in-out infinite alternate}
-.flames i:nth-child(2){height:19px;animation-delay:-.3s}
-@keyframes flame-dance{from{rotate:-8deg;scale:1 .85}to{rotate:8deg;scale:.82 1.12}}
-.egg[data-egg="candles"][aria-pressed="true"] .flames{opacity:1}
+button.egg[data-egg="candles"]:is(:hover,:active){background:transparent}
+.egg[data-egg="candles"]::after{
+  content:"";position:absolute;pointer-events:none;inset:-12% -10% 48%;opacity:0;
+  background:radial-gradient(ellipse at var(--candle-glow-x,55%) 46%,#ffdf8670 0%,#ffe8a741 30%,transparent 67%);
+  transition:opacity .22s ease
+}
+#desk .egg[data-egg="candles"]{--candle-glow-x:70%}
+.egg[data-egg="candles"][aria-pressed="true"]::after{opacity:1}
 .mobile-invite .letter{position:relative}
 .letter .egg[data-egg="stamp"]{right:15px;top:15px;width:82px;height:82px}
 .stamp-mark{position:absolute;z-index:1;top:58%;right:0;white-space:nowrap;pointer-events:none;
@@ -71,7 +74,7 @@
 .gar.on .garage-note{animation:garage-note 4s 1.25s both}
 @keyframes garage-note{0%,100%{opacity:0}12%,83%{opacity:1}}
 @media (prefers-reduced-motion:reduce){
-  .egg.effect,.flames i,.gar.on .garage-guest,.gar.on .garage-note,.ball-glints i{animation:none}
-  .garage-guests,.stamp-mark,.gar .gp::after{transition:none}
+  .egg.effect,.gar.on .garage-guest,.gar.on .garage-note,.ball-glints i{animation:none}
+  .garage-guests,.stamp-mark,.gar .gp::after,.egg[data-egg="candles"]::after{transition:none}
   .gar.on .garage-note{opacity:1}
 }
