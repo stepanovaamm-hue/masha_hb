@@ -67,14 +67,10 @@
         <rect width="1774" height="887" fill="#162637" opacity=".81" clip-path="url(#${id}-windows)"/>
       </g>
       <g ${label('guests','03 · Гости за стеклом')} class="garage-art__on garage-art__guests" clip-path="url(#${id}-windows)">
-        <g opacity=".94" filter="url(#${id}-ink)">
-          <image href="${silhouettes[0]}" x="325" y="518" width="177" height="201"/>
-          <image href="${silhouettes[1]}" x="495" y="431" width="213" height="347"/>
-        </g>
-        <g opacity=".90" filter="url(#${id}-ink)">
-          <image href="${silhouettes[2]}" x="1239" y="590" width="168" height="168"/>
-          <image href="${silhouettes[3]}" x="1373" y="605" width="118" height="118"/>
-        </g>
+        <image href="${silhouettes[0]}" x="1224" y="490" width="236" height="268" opacity=".94" filter="url(#${id}-ink)"/>
+        <image href="${silhouettes[1]}" x="997" y="422" width="227" height="370" opacity=".94" filter="url(#${id}-ink)"/>
+        <image href="${silhouettes[2]}" x="138" y="378" width="418" height="418" opacity=".90" filter="url(#${id}-ink)"/>
+        <image href="${silhouettes[3]}" x="433" y="422" width="336" height="336" opacity=".90" filter="url(#${id}-ink)"/>
       </g>
       <g ${label('glass','04 · Отражения')} class="garage-art__on" clip-path="url(#${id}-windows)">
         <rect x="160" y="347" width="580" height="410" fill="url(#${id}-reflection)"/>
