@@ -1,0 +1,86 @@
+.mobile-invite,.event-ticket,.mobile-top{max-width:560px;margin-inline:auto}
+.mobile-top{
+  min-height:68px;display:flex;align-items:center;gap:10px;padding:10px 16px;
+  background:var(--paper);border-bottom:1px solid var(--ink);position:relative
+}
+.mobile-top .date-mark{margin-right:auto;color:var(--ink);text-decoration:none;font:500 20px/1 "Martian Mono",monospace}
+.mobile-top .top-cta,.mobile-top .burger{min-height:44px}
+.mobile-top .top-cta{background:var(--blue);color:var(--ink);padding:0 16px}
+.mobile-top .burger{width:44px;border:1.5px solid var(--ink);border-radius:50%;background:transparent;display:grid;place-content:center;gap:4px;cursor:pointer}
+.mobile-top .burger span{width:16px;height:1.5px;background:var(--ink)}
+.mobile-top .menu{top:100%;right:16px;z-index:2}
+.mobile-top a:focus-visible,.mobile-top button:focus-visible,.mobile-invite a:focus-visible{outline:3px solid #5062C9;outline-offset:3px}
+.event-ticket{padding:10px 16px;background:var(--yellow)}
+.mobile-invite{position:relative;display:none;overflow:hidden;background:var(--paper);color:var(--ink)}
+@media (max-width:1100px){.mobile-invite{display:block}}
+.mobile-invite section,.mobile-invite footer{position:relative;padding:clamp(34px,9vw,54px) clamp(18px,6vw,34px);scroll-margin-top:70px}
+.mobile-invite p{margin:0 0 1em}
+.mobile-invite p:last-child{margin-bottom:0}
+.mobile-invite h2,.mobile-invite h3{font-family:Onest,sans-serif;line-height:1.03;margin:0 0 .55em;text-wrap:balance}
+.mobile-invite h2{font-size:clamp(32px,8.7vw,51px);letter-spacing:-.045em}
+.mobile-invite h3{font-size:clamp(21px,5.6vw,29px);letter-spacing:-.024em}
+.mobile-invite .art-title{margin-bottom:20px}
+.art-title img{width:min(100%,390px)}
+.about-title img{width:min(77%,320px);filter:brightness(.15)}
+.about-title img+img{margin-left:16%;margin-top:-2%}
+.dress .art-title img{width:min(87%,360px)}
+.together .art-title img{width:100%;margin-inline:auto;filter:brightness(.15)}
+#m-rsvp .art-title img{width:min(74%,320px)}
+.mobile-invite footer .art-title img{width:min(74%,240px)}
+.mobile-invite .k{font:400 11px/1.45 "Martian Mono",monospace;letter-spacing:.045em;text-transform:uppercase;margin-bottom:16px}
+.mobile-invite .caption{font:500 17px/1.35 Onest,sans-serif}
+.mobile-invite a:not(.mbtn){color:inherit;text-underline-offset:4px}
+.mobile-invite .mbtn{max-width:100%;text-align:center}
+.mobile-invite .intro{padding-top:25px;background:#f4f4f4}
+.mobile-invite .hero-title{width:100%;max-width:450px;margin:0 auto 10px}
+.mobile-invite .hero-art{isolation:isolate;position:relative;aspect-ratio:1.13;margin:0 -14px 22px}
+.hero-art::before{content:"";position:absolute;z-index:-1;inset:1% 1% 12% 19%;background:var(--blue);clip-path:polygon(49% 0,55% 36%,78% 12%,69% 40%,100% 31%,75% 49%,97% 70%,68% 63%,73% 100%,53% 75%,36% 97%,35% 71%,1% 78%,25% 53%,1% 40%,36% 40%,26% 6%,45% 32%)}
+.hero-art img{position:absolute}
+.hero-art .child{width:73%;right:7%;bottom:0;height:94%;object-fit:contain;object-position:bottom}
+.hero-art .disco{width:23%;right:2%;top:-2%;transform-origin:50% 0;animation:swing 4s ease-in-out infinite alternate}
+.hero-art .mic{width:26%;left:4%;bottom:0;rotate:-8deg;mix-blend-mode:multiply}
+.hero-art .confetti{width:14%;left:6%;top:8%;rotate:18deg}
+.mobile-invite .ribbon{position:relative;background:var(--pink);padding:12px 16px;margin:0 -8px;border-block:1px solid var(--ink);rotate:-2deg;text-align:center;font:400 11px/1.5 "Martian Mono",monospace;text-transform:uppercase;z-index:1}
+.mobile-invite .blue{background:var(--blue)}
+.mobile-invite .blue h2{color:var(--ink)}
+.mobile-invite .portrait{width:64%;max-width:270px;max-height:340px;object-fit:contain;margin:0 auto 24px;rotate:-3deg}
+.mobile-invite .garage{margin:22px 0 0;border-bottom:2px solid var(--ink)}
+.mobile-invite .program{color:#fff;background:#343328 linear-gradient(#161616a0,#16161668)}
+.mobile-invite .program::before,.mobile-invite .wish-section::before{
+  content:"";position:absolute;inset:0;background:linear-gradient(#16161688,#16161670),var(--section-photo) center/cover;pointer-events:none
+}
+.mobile-invite .program{--section-photo:url("img/mobile-v2/program.webp")}
+.mobile-invite .program>* ,.mobile-invite .wish-section>*{position:relative}
+.mobile-invite .program-list{list-style:none;padding:0;margin:24px 0 0;display:grid;gap:12px}
+.mobile-invite .program-list li{background:var(--blue);color:var(--ink);border-radius:18px;padding:19px 20px;min-width:0}
+.mobile-invite .program-list li:nth-child(2){background:var(--yellow)}
+.mobile-invite .program-list li:nth-child(4){background:#ec5f2a}
+.mobile-invite .program-list li:nth-child(5){background:#e6e6e6}
+.mobile-invite .program-list li:nth-child(6){background:#efadc7}
+.mobile-invite .program-list .k{display:block;margin-bottom:6px}
+.mobile-invite .program-list img{width:62px;max-height:64px;object-fit:contain;float:right;margin:0 0 8px 10px}
+.mobile-invite .dress{background:#5062c9;color:white}
+.mobile-invite .sequin{width:62%;max-width:260px;margin:4px auto 20px;rotate:-7deg}
+.mobile-invite .letter{border:1px solid var(--ink);padding:20px;background:#f0efeb;margin:18px 0 30px;box-shadow:5px 6px 0 #16161622}
+.mobile-invite .letter .postmark{width:72px;float:right;margin:0 0 10px 12px;rotate:7deg}
+.mobile-invite .letter hr{border:0;border-top:1px dashed #686761;margin:18px 0}
+.mobile-invite .letter ul,.mobile-invite .checklists ul{padding-left:1.25em}
+.mobile-invite .checklists{display:grid;gap:20px}
+.mobile-invite .checklists ul{margin:0}
+.mobile-invite .together{text-align:center;padding-bottom:46px}
+.mobile-invite .together h2{font-size:clamp(30px,8vw,44px)}
+.mobile-invite .toast-art{width:96px;margin:18px auto 0;rotate:-11deg}
+.mobile-invite .wish-section{--section-photo:url("img/mobile-v2/wishlist.webp");background:#282722;color:#fff}
+.mobile-invite .wish-section::before{background:linear-gradient(#161616d9,#161616aa),var(--section-photo) center/cover}
+.mobile-invite .wish-section .mbtn{background:var(--paper);color:var(--ink)}
+.mobile-invite .rsvp{margin-top:24px;gap:20px;padding:clamp(15px,4.5vw,24px)}
+.mobile-invite .rsvp p{margin:0}
+.mobile-invite .rsvp-choices{align-items:flex-start;flex-direction:column}
+.mobile-invite .rsvp .mbtn{width:100%}
+.mobile-invite footer{background:#0e7c5b;color:#fff}
+.mobile-invite footer .closing-details{margin-top:22px;padding-top:12px;border-top:1px solid #fff8;font-size:13px}
+.mobile-invite footer .footer-star{width:53px;float:right;margin:0 0 12px 15px}
+@media (min-width:480px){
+  .mobile-invite .program-list,.mobile-invite .checklists{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (prefers-reduced-motion:reduce){.hero-art .disco{animation:none}}
