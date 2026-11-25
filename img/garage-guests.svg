@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg">
+  <symbol id="profile" viewBox="0 0 64 100">
+    <path fill="currentColor" d="M13 100c2-14 0-28 3-42 1-6 6-10 14-13l2-7c-5-2-8-8-8-15 0-10 5-17 14-17 8 0 12 6 12 13l5 9-5 2-1 6c0 4-3 5-7 4l-1 5c3 3 7 7 8 13l5 20-6 5-7-13 2 30z"/>
+  </symbol>
+  <symbol id="glass" viewBox="0 0 64 100">
+    <path fill="currentColor" d="M8 100l4-34c1-12 5-19 16-22l1-8c-4-3-6-8-6-15 0-10 6-17 15-17 7 0 13 6 13 15 0 8-4 15-9 18l1 8c4 2 7 5 9 11l5-13 5 2-3 22c-1 5-5 7-9 3l-5-8 2 38z"/>
+    <path fill="currentColor" d="M53 32h10l-2 9-2 2v6h-3v-6l-2-2z"/>
+  </symbol>
+  <symbol id="curly" viewBox="0 0 64 100">
+    <path fill="currentColor" d="M7 100l4-34c1-8 4-15 10-18l5-3 1-8c-5-1-8-6-8-11-4-6-2-13 3-16 1-5 6-7 11-5 5-3 11-1 13 4 5 2 8 6 6 12 2 6-1 13-6 17l1 7c11 3 14 12 14 21l2 34z"/>
+  </symbol>
+</svg>

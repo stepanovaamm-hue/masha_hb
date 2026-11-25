@@ -80,7 +80,6 @@
 .mobile-invite .checklists ul{margin:0}
 .mobile-invite .together{text-align:center;padding-bottom:46px}
 .mobile-invite .together h2{font-size:clamp(30px,8vw,44px)}
-.mobile-invite .toast-art{width:96px;margin:18px auto 0;rotate:-11deg}
 .mobile-invite .wish-section{--section-photo:url("img/mobile-v2/wishlist.webp");background:#282722;color:#fff}
 .mobile-invite .wish-section::before{background:linear-gradient(#161616d9,#161616aa),var(--section-photo) center/cover}
 .mobile-invite .wish-section .mbtn{background:var(--paper);color:var(--ink)}

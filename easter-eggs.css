@@ -48,14 +48,22 @@
 }
 .egg-toast button{position:absolute;top:0;right:0;min-width:34px;min-height:34px;border:0;background:transparent;cursor:pointer;font:500 20px Onest}
 .egg-toast a{display:block;color:inherit;text-underline-offset:3px}
-.garage-guests{position:absolute;inset:0;z-index:1;opacity:0;transition:opacity .45s 1.45s;filter:drop-shadow(0 1px 1px #15172266)}
-.gar.on .garage-guests{opacity:.88}
-.garage-guest{position:absolute;bottom:-1%;left:var(--guest-x);width:var(--guest-w,16%);height:var(--guest-h,65%);transform-origin:bottom center}
-.garage-guest::before,.garage-guest::after{content:"";position:absolute;background:#151722}
-.garage-guest::before{width:37%;height:30%;left:32%;top:0;border-radius:55% 48% 46% 42%}
-.garage-guest::after{inset:26% 4% -5%;border-radius:39% 43% 0 0;clip-path:polygon(13% 9%,42% 0,61% 0,83% 8%,98% 34%,84% 48%,76% 35%,78% 100%,20% 100%,23% 35%,0 66%,0 46%)}
-.gar.on .garage-guest{animation:guest-sway 3.8s ease-in-out var(--guest-delay,0s) infinite alternate}
-@keyframes guest-sway{from{rotate:-4deg}to{rotate:4deg}}
+.garage-guests{position:absolute;inset:0;z-index:1;opacity:0;transition:opacity .65s 1.45s}
+.gar.on .garage-guests{opacity:.86}
+.garage-guest{position:absolute;bottom:-2%;left:var(--guest-x);width:var(--guest-w);height:var(--guest-h);color:#22232c;transform-origin:bottom center;filter:drop-shadow(0 -1px 1px #fff0bf40)}
+.garage-guest:nth-child(2){color:#292531}
+.garage-guest:nth-child(3){color:#1a202b}
+.gar.on .garage-guest{animation:guest-sway 5.2s ease-in-out var(--guest-delay) infinite alternate}
+@keyframes guest-sway{from{rotate:-1.8deg}to{rotate:2deg}}
+.gar .gp>img{filter:saturate(.72) brightness(1.08)}
+.gar .gp::after{
+  content:"";position:absolute;inset:0;z-index:2;pointer-events:none;opacity:0;
+  background:linear-gradient(118deg,transparent 28%,#fff6d81f 35%,transparent 52%),linear-gradient(0deg,#e0ad6418,transparent 35%);
+  transition:opacity .5s 1.5s
+}
+.gar.on .gp::after{opacity:1}
+.gar .gp .sp{opacity:0}
+.gar.on .gp .sp{opacity:.4}
 .garage-note{position:absolute;left:50%;top:calc(var(--y)*var(--u));translate:-50% -50%;
   padding:4px 8px;border:1px solid var(--ink);background:var(--paper);color:var(--ink);border-radius:10px;
   opacity:0;white-space:nowrap;font:500 clamp(9px,calc(24*var(--u)),18px)/1.2 Onest,sans-serif
@@ -64,6 +72,6 @@
 @keyframes garage-note{0%,100%{opacity:0}12%,83%{opacity:1}}
 @media (prefers-reduced-motion:reduce){
   .egg.effect,.flames i,.gar.on .garage-guest,.gar.on .garage-note,.ball-glints i{animation:none}
-  .garage-guests,.stamp-mark{transition:none}
+  .garage-guests,.stamp-mark,.gar .gp::after{transition:none}
   .gar.on .garage-note{opacity:1}
 }

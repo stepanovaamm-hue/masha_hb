@@ -1,0 +1,23 @@
+.toast-stage{
+  overflow:hidden;isolation:isolate;position:relative;pointer-events:none
+}
+#desk .toast-stage{
+  position:absolute;z-index:1;inset-inline:0;top:calc(7294 * var(--u));
+  height:calc(820 * var(--u));background:var(--blue)
+}
+.toast-stage .toast-glass{
+  position:absolute;z-index:1;left:2%;bottom:-2%;width:31%;
+  transform-origin:24% 88%;animation:glass-sway 4.8s ease-in-out infinite
+}
+@keyframes glass-sway{0%,100%{rotate:-3.5deg}50%{rotate:4.5deg}}
+.mobile-invite .together .toast-stage{
+  margin:12px -16px calc(-1 * clamp(34px,9vw,54px));aspect-ratio:1.8
+}
+.mobile-invite .together .toast-glass{left:14%;width:43%}
+.paper-confetti{position:absolute;inset:0;pointer-events:none}
+.paper-confetti img{
+  position:absolute;left:var(--x);top:var(--y);width:var(--s);height:var(--s);
+  translate:-50% -50%;rotate:var(--r)
+}
+.paper-confetti img,.fall img{filter:drop-shadow(0 1px 1.5px rgba(22,22,22,.18))}
+@media(prefers-reduced-motion:reduce){.toast-stage .toast-glass{animation:none}}
