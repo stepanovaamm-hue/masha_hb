@@ -1,17 +1,20 @@
 (() => {
   const windows = [
-    '161,352 271,352 271,556 161,565',
-    '295,352 738,352 738,564 295,564',
-    '161,585 272,585 272,738 161,738',
-    '295,585 492,585 492,744 295,744',
-    '515,585 738,585 738,744 515,744',
-    '1036,405 1140,381 1140,620 1036,609',
-    '1036,637 1140,650 1140,798 1036,775',
-    '1164,380 1228,380 1228,781 1164,781',
-    '1254,380 1486,380 1486,781 1254,781',
-    '1508,380 1580,380 1580,613 1508,613',
-    '1508,634 1580,634 1580,776 1508,776',
-    '1594,380 1617,380 1617,781 1594,781',
+    '158,337 270,337 270,342 179,342 162,566 158,566',
+    '193,366 268,366 270,557 178,557',
+    '291,350 740,350 740,565 293,568',
+    '159,582 274,582 275,743 159,743',
+    '293,582 493,581 494,745 295,744',
+    '512,581 740,580 740,746 513,745',
+    '1033,377 1087,377 1033,387',
+    '1033,402 1142,378 1142,626 1034,621',
+    '1034,632 1142,639 1143,788 1034,775',
+    '1160,377 1229,377 1234,781 1160,781',
+    '1251,378 1484,378 1490,781 1256,781',
+    '1506,379 1582,379 1583,620 1509,620',
+    '1510,634 1583,634 1585,781 1513,781',
+    '1592,378 1620,378 1620,620 1593,620',
+    '1593,634 1620,634 1621,781 1593,781',
   ];
   const bulbs = [
     [69,249],[104,274],[148,282],[191,272],[218,250],[250,256],[287,275],[335,278],
@@ -24,12 +27,21 @@
 
   function garageSvg(id, facade, silhouettes, standalone = false) {
     const label = (key, name) => `id="${id}-${key}" inkscape:groupmode="layer" inkscape:label="${name}"`;
-    const windowsPolygon = windows.map(points => `<polygon points="${points}"/>`).join('');
+    const panes = windows.map(points => `<polygon points="${points}"/>`).join('');
     const bulbShades = bulbs.map(([x,y]) => `<circle cx="${x}" cy="${y}" r="5.4" fill="#5b5042"/>`).join('');
     const bulbGlows = bulbs.map(([x,y]) => `<circle cx="${x}" cy="${y}" r="21" fill="url(#${id}-glow)"/><circle cx="${x}" cy="${y}" r="4.3" fill="#fff2bf"/>`).join('');
     return `<svg xmlns="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" viewBox="0 0 1774 887" width="1774" height="887" role="img" aria-label="Гараж с мятной дверью, светом в окнах и гирляндой">
       <defs>
-        <clipPath id="${id}-windows">${windowsPolygon}</clipPath>
+        <mask id="${id}-windows" maskUnits="userSpaceOnUse" x="0" y="0" width="1774" height="887">
+          <g fill="white">${panes}</g>
+          <!-- The bench and folded blankets sit in front of the glass. -->
+          <path fill="black" d="M1400 779 L1402 740 Q1403 725 1414 725 L1422 725 Q1426 718 1441 716
+            Q1436 710 1446 705 Q1451 702 1470 702 L1490 693 Q1497 692 1514 697
+            Q1527 697 1528 705 Q1544 697 1568 699 Q1605 697 1619 707
+            Q1622 712 1618 715 L1621 724 Q1642 730 1645 736 L1645 743 L1438 744
+            L1437 782 H1430 L1431 744 Q1412 732 1409 736 L1405 779 Z
+            M1593 742 H1597 L1596 782 H1592 Z"/>
+        </mask>
         <filter id="${id}-ink" color-interpolation-filters="sRGB">
           <feColorMatrix type="matrix" values="0 0 0 0 .14  0 0 0 0 .09  0 0 0 0 .10  -.2126 -.7152 -.0722 0 1"/>
           <feComponentTransfer><feFuncA type="linear" slope="1.12" intercept="-.12"/></feComponentTransfer>
@@ -45,11 +57,11 @@
           <stop offset=".53" stop-color="#ffedc8" stop-opacity="0"/>
         </linearGradient>
         <radialGradient id="${id}-disco-rose">
-          <stop stop-color="#ef78be" stop-opacity=".72"/>
+          <stop stop-color="#f477bc" stop-opacity=".86"/>
           <stop offset="1" stop-color="#ef78be" stop-opacity="0"/>
         </radialGradient>
         <radialGradient id="${id}-disco-violet">
-          <stop stop-color="#786eff" stop-opacity=".75"/>
+          <stop stop-color="#8177ff" stop-opacity=".9"/>
           <stop offset="1" stop-color="#786eff" stop-opacity="0"/>
         </radialGradient>
         <pattern id="${id}-disco-specks" width="149" height="113" patternUnits="userSpaceOnUse">
@@ -63,22 +75,23 @@
       ${standalone ? `<g ${label('facade','01 · Фасад и интерьер')}>
         <image href="${facade}" width="1774" height="887"/>
       </g>` : ''}
-      <g ${label('window-dim','02 · Затемнение окон')} class="garage-art__off" ${standalone ? 'style="display:none"' : ''}>
-        <rect width="1774" height="887" fill="#162637" opacity=".81" clip-path="url(#${id}-windows)"/>
+      <g ${label('window-dim','02 · Приглушённый свет в окнах')} mask="url(#${id}-windows)">
+        <rect width="1774" height="887" fill="#252432" opacity=".37"/>
+        <rect class="garage-art__off" width="1774" height="887" fill="#152436" fill-opacity=".68" ${standalone ? 'style="display:none"' : ''}/>
       </g>
-      <g ${label('guests','03 · Гости за стеклом')} class="garage-art__on garage-art__guests" clip-path="url(#${id}-windows)">
+      <g ${label('guests','03 · Гости за стеклом')} class="garage-art__on garage-art__guests" mask="url(#${id}-windows)">
         <image href="${silhouettes[0]}" x="1224" y="490" width="236" height="268" opacity=".94" filter="url(#${id}-ink)"/>
         <image href="${silhouettes[1]}" x="997" y="422" width="227" height="370" opacity=".94" filter="url(#${id}-ink)"/>
         <image href="${silhouettes[2]}" x="138" y="378" width="418" height="418" opacity=".90" filter="url(#${id}-ink)"/>
         <image href="${silhouettes[3]}" x="433" y="422" width="336" height="336" opacity=".90" filter="url(#${id}-ink)"/>
       </g>
-      <g ${label('glass','04 · Отражения')} class="garage-art__on" clip-path="url(#${id}-windows)">
-        <rect x="160" y="347" width="580" height="410" fill="url(#${id}-reflection)"/>
-        <rect x="1034" y="378" width="590" height="421" fill="url(#${id}-reflection)" opacity=".65"/>
+      <g ${label('glass','04 · Отражения')} class="garage-art__on" mask="url(#${id}-windows)">
+        <rect x="155" y="335" width="588" height="420" fill="url(#${id}-reflection)"/>
+        <rect x="1030" y="373" width="598" height="425" fill="url(#${id}-reflection)" opacity=".65"/>
       </g>
       <g ${label('bulbs-off','05 · Выключенные лампочки')} class="garage-art__off" ${standalone ? 'style="display:none"' : ''}>${bulbShades}</g>
       <g ${label('bulbs-on','06 · Свет гирлянды')} class="garage-art__on">${bulbGlows}</g>
-      <g ${label('disco','07 · Отблески дискотеки')} class="garage-art__on garage-art__disco" clip-path="url(#${id}-windows)">
+      <g ${label('disco','07 · Отблески дискотеки')} class="garage-art__on garage-art__disco" mask="url(#${id}-windows)">
         <g class="garage-art__disco-wash">
           <ellipse cx="480" cy="443" rx="196" ry="137" fill="url(#${id}-disco-rose)"/>
           <ellipse cx="678" cy="625" rx="139" ry="115" fill="url(#${id}-disco-violet)"/>

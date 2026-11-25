@@ -20,13 +20,15 @@
 .garage-art__disco-specks{
   opacity:.45;animation:garage-disco-glints 3.4s ease-in-out infinite paused
 }
-.garage-art--visible :is(.garage-art__disco-wash,.garage-art__disco-specks){
+.garage-art--visible[data-lit="true"] :is(.garage-art__disco-wash,.garage-art__disco-specks){
   animation-play-state:running
 }
 @keyframes garage-disco-sweep{
-  0%{transform:translate(-38px,18px);opacity:.2}
-  45%{opacity:.75}
-  100%{transform:translate(55px,-12px);opacity:.45}
+  0%{transform:translate(-38px,18px);opacity:.15}
+  30%{opacity:.85}
+  53%{opacity:.24}
+  75%{opacity:.78}
+  100%{transform:translate(55px,-12px);opacity:.35}
 }
 @keyframes garage-disco-glints{
   0%,100%{transform:translate(-22px,12px);opacity:.24}
